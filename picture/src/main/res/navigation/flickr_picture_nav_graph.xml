@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/flickr_picture_nav_graph"
+    app:startDestination="@id/recentPhotoFragment">
+
+
+    <fragment
+        android:id="@+id/recentPhotoFragment"
+        tools:layout="@layout/fragment_recent_photo"
+        android:name="com.alireza.picture.presentation.recentPhoto.RecentPhotoFragment"
+        android:label="RecentPhotoFragment" />
+</navigation>

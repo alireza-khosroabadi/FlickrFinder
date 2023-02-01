@@ -1,6 +1,6 @@
 package com.alireza.picture.domain.repository.model.recentPhoto
 
-import com.alireza.core.base.domain.model.DomainModelMapper
+import com.alireza.core.domain.model.DomainModelMapper
 import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntity
 
 class RecentPhotoMapper : DomainModelMapper<RecentPhoto, RecentPhotoEntity> {

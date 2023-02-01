@@ -1,6 +1,6 @@
 package com.alireza.picture.data.local.entity.recentPhoto
 
-import com.alireza.core.base.data.local.entity.EntityMapper
+import com.alireza.core.data.local.entity.EntityMapper
 import com.alireza.picture.data.remote.entity.photo.PhotoResponse
 
 class RecentPhotoEntityMapper : EntityMapper<RecentPhotoEntity, PhotoResponse> {
@@ -15,9 +15,9 @@ class RecentPhotoEntityMapper : EntityMapper<RecentPhotoEntity, PhotoResponse> {
             isPublic = isPublic>0,
             isFriend = isFriend>0,
             isFamily = isFamily>0,
-            url = urlS,
-            height = heightS.toInt(),
-            width = widthS.toInt()
+            url = urlS?:"https:/live.staticflickr.com/$server/${id}_${secret}_m.jpg",
+            height = heightS?.toInt()?:0,
+            width = widthS?.toInt()?:0
         )
     }
 }
