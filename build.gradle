@@ -116,7 +116,9 @@ buildscript {
                 "com.google.truth:truth:$truth_version",
                 "junit:junit:$junit_version",
                 "com.google.dagger:hilt-android-testing:$hilt_version",
-                "androidx.navigation:navigation-testing:$nav_version"
+                "androidx.navigation:navigation-testing:$nav_version",
+                "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version",
+                "org.mockito:mockito-inline:$mockito_inline"
         ]
 
         androidKaptTestLibraries =[
