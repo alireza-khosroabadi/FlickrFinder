@@ -1,8 +1,6 @@
 package com.alireza.core.base.data.repository.offlinePattern
 
-import com.alireza.core.base.data.remote.entity.ResponseModel
-import com.alireza.core.base.data.remote.response.ApiModel
-import com.alireza.core.base.data.repository.DataModel
+import com.alireza.core.base.data.remote.entity.BaseResponseModel
 import com.alireza.core.base.data.repository.ErrorModel
 import com.alireza.core.base.data.repository.ExceptionModel
 import com.alireza.core.base.data.repository.Success
@@ -20,7 +18,7 @@ import kotlinx.coroutines.flow.flow
  * @param shouldFetch is lambda with boolean return to make decision for fetch data from network or not
  * */
 
-inline fun <ResultType: Any, RequestType:ApiModel<ResponseModel>> networkBoundResource(
+inline fun <ResultType: Any, RequestType: BaseResponseModel> networkBoundResource(
     crossinline query: () -> Flow<ResultType>,
     crossinline fetch: suspend () -> RequestType,
     crossinline saveFetchResult: suspend (RequestType) -> Unit,
@@ -33,7 +31,7 @@ inline fun <ResultType: Any, RequestType:ApiModel<ResponseModel>> networkBoundRe
     if (shouldFetch()) {
         // Need to fetch data -> call backend
         val fetchResult = fetch()
-        resultStatus = fetchResult.stat=="ok"
+        resultStatus = fetchResult.state=="ok"
         // got data from backend, store it in database
         if (resultStatus)
             saveFetchResult(fetchResult)
