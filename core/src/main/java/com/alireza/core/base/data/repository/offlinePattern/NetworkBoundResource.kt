@@ -1,8 +1,7 @@
 package com.alireza.core.base.data.repository.offlinePattern
 
-import com.alireza.core.base.data.remote.entity.ResponseModel
+import com.alireza.core.base.data.remote.entity.BaseResponseModel
 import com.alireza.core.base.data.remote.response.ApiModel
-import com.alireza.core.base.data.repository.DataModel
 import com.alireza.core.base.data.repository.ErrorModel
 import com.alireza.core.base.data.repository.ExceptionModel
 import com.alireza.core.base.data.repository.Success
@@ -20,7 +19,7 @@ import kotlinx.coroutines.flow.flow
  * @param shouldFetch is lambda with boolean return to make decision for fetch data from network or not
  * */
 
-inline fun <ResultType: Any, RequestType:ApiModel<ResponseModel>> networkBoundResource(
+inline fun <ResultType: Any, RequestType:ApiModel<BaseResponseModel>> networkBoundResource(
     crossinline query: () -> Flow<ResultType>,
     crossinline fetch: suspend () -> RequestType,
     crossinline saveFetchResult: suspend (RequestType) -> Unit,
