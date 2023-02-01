@@ -2,14 +2,12 @@ package com.alireza.picture.data.repository.recentPhoto
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.alireza.core.base.data.repository.ErrorModel
-import com.alireza.core.base.data.repository.ExceptionModel
 import com.alireza.core.base.data.repository.Success
-import com.alireza.picture.data.fakeData.fakeRecentPhotoEntityList
 import com.alireza.picture.data.fakeData.fakeRecentPhotoEntityListFlow
 import com.alireza.picture.data.fakeData.fakeRecentPhotoEntityResponse
 import com.alireza.picture.data.fakeData.fakeRecentPhotoFailedFlow
 import com.alireza.picture.data.local.dao.recentPhoto.RecentPhotoDao
-import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoMapper
+import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntityMapper
 import com.alireza.picture.data.remote.api.PictureApiService
 import com.alireza.picture.domain.repository.recentPhoto.RecentPhotoRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -22,14 +20,13 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
-import java.io.IOException
 
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
 class RecentPhotoRepositoryImplTest {
 
-    private val recentPhotoMapper = RecentPhotoMapper()
+    private val recentPhotoMapper = RecentPhotoEntityMapper()
     private val recentPhotoDao = mock<RecentPhotoDao> {
         on{recentPhotos()} doReturn fakeRecentPhotoEntityListFlow
     }

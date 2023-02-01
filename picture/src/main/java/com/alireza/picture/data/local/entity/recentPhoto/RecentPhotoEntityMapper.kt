@@ -3,7 +3,7 @@ package com.alireza.picture.data.local.entity.recentPhoto
 import com.alireza.core.base.data.local.entity.EntityMapper
 import com.alireza.picture.data.remote.entity.photo.PhotoResponse
 
-class RecentPhotoMapper : EntityMapper<RecentPhotoEntity, PhotoResponse> {
+class RecentPhotoEntityMapper : EntityMapper<RecentPhotoEntity, PhotoResponse> {
     override fun toEntityModel(dataModel: PhotoResponse): RecentPhotoEntity = with(dataModel) {
         RecentPhotoEntity(
             id = id,

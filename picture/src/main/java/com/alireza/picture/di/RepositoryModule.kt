@@ -1,7 +1,7 @@
 package com.alireza.picture.di
 
 import com.alireza.picture.data.local.dao.recentPhoto.RecentPhotoDao
-import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoMapper
+import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntityMapper
 import com.alireza.picture.data.remote.api.PictureApiService
 import com.alireza.picture.data.repository.recentPhoto.RecentPhotoRepositoryImpl
 import com.alireza.picture.domain.repository.recentPhoto.RecentPhotoRepository
@@ -18,7 +18,7 @@ object RepositoryModule {
     fun provideRecentPhotoRepository(
         apiService: PictureApiService,
         recentPhotoDao: RecentPhotoDao,
-        recentPhotoMapper: RecentPhotoMapper
+        recentPhotoMapper: RecentPhotoEntityMapper
     ): RecentPhotoRepository =
         RecentPhotoRepositoryImpl(apiService,recentPhotoDao, recentPhotoMapper)
 }
