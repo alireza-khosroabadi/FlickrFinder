@@ -4,7 +4,7 @@ import com.alireza.core.base.data.repository.DataModel
 import com.alireza.core.base.data.repository.offlinePattern.networkBoundResource
 import com.alireza.picture.data.local.dao.recentPhoto.RecentPhotoDao
 import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntity
-import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoMapper
+import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntityMapper
 import com.alireza.picture.data.remote.api.PictureApiService
 import com.alireza.picture.domain.repository.recentPhoto.RecentPhotoRepository
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 class RecentPhotoRepositoryImpl @Inject constructor(
     private val pictureApiService: PictureApiService,
     private val recentPhotoDao: RecentPhotoDao,
-    private val recentPhotoMapper: RecentPhotoMapper
+    private val recentPhotoMapper: RecentPhotoEntityMapper
 ) :
     RecentPhotoRepository {
     override fun recentPhoto(): Flow<DataModel<List<RecentPhotoEntity>>> = networkBoundResource(

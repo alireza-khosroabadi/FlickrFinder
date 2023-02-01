@@ -6,7 +6,7 @@ import org.junit.Test
 
 
 class RecentPhotoMapperTest {
-    private val mapper: RecentPhotoMapper by lazy { RecentPhotoMapper() }
+    private val mapper: RecentPhotoEntityMapper by lazy { RecentPhotoEntityMapper() }
 
     @Test
     fun `test convert recent photo response to recent photo entity return one item`() {
