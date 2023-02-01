@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.flowOf
 val fakeRecentPhotoEntity = RecentPhotoEntity(
     id = "1",
     owner = "Alireza",
+    ownerName = "Alireza",
     secret = "XXXX",
     server = "number one",
     farm = 1,

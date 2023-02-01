@@ -8,9 +8,10 @@ import com.alireza.core.data.repository.Success
 import com.alireza.core.domain.model.UseCaseModel
 import com.alireza.picture.data.fakeData.fakeRecentPhotoEntityList
 import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntity
-import com.alireza.picture.domain.repository.model.recentPhoto.RecentPhoto
-import com.alireza.picture.domain.repository.model.recentPhoto.RecentPhotoMapper
+import com.alireza.picture.domain.model.recentPhoto.RecentPhoto
+import com.alireza.picture.domain.model.recentPhoto.RecentPhotoMapper
 import com.alireza.picture.domain.repository.recentPhoto.RecentPhotoRepository
+import com.alireza.picture.domain.useCase.recentPhoto.RecentPhotoUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest

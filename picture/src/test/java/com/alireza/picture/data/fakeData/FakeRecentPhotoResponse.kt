@@ -2,7 +2,6 @@ package com.alireza.picture.data.fakeData
 
 import com.alireza.picture.data.remote.entity.recentPhoto.RecentPhotoResponse
 import com.google.gson.Gson
-import kotlinx.coroutines.flow.flowOf
 
 internal val fakeRecentPhotoEntityResponse = Gson().fromJson(
     "{ \"photos\": { \"page\": 1, \"pages\": \"1000\", \"perpage\": 1, \"total\": \"1000\", \n" +

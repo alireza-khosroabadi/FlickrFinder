@@ -1,4 +1,4 @@
-package com.alireza.picture.data.remote.entity.photo
+package com.alireza.picture.data.remote.entity.searchPhoto
 
 import com.alireza.core.data.remote.entity.ResponseModel
 import com.google.gson.annotations.SerializedName
@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class PhotoResponse(
     @SerializedName("id"       ) var id       : String,
     @SerializedName("owner"    ) var owner    : String,
+    @SerializedName("ownername") var ownerName: String,
     @SerializedName("secret"   ) var secret   : String,
     @SerializedName("server"   ) var server   : String,
     @SerializedName("farm"     ) var farm     : Int,

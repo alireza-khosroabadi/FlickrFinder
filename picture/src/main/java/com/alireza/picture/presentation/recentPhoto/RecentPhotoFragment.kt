@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.alireza.core.presentation.fragment.BaseObserverFragment
 import com.alireza.picture.databinding.FragmentRecentPhotoBinding
-import com.alireza.picture.domain.repository.model.recentPhoto.RecentPhoto
+import com.alireza.picture.domain.model.recentPhoto.RecentPhoto
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -75,6 +75,13 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
     private fun setupListeners() {
         emptyStateListener()
         errorStateListener()
+        searchClickListener()
+    }
+
+    private fun searchClickListener() {
+        binding.imgSearch.setOnClickListener {
+
+        }
     }
 
     private fun initializeRecentPhotoListRecyclerView() {

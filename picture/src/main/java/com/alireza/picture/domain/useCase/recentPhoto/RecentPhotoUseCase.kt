@@ -1,12 +1,12 @@
-package com.alireza.picture.domain.repository.useCase.recentPhoto
+package com.alireza.picture.domain.useCase.recentPhoto
 
 import com.alireza.core.data.repository.ErrorModel
 import com.alireza.core.data.repository.ExceptionModel
 import com.alireza.core.data.repository.Success
 import com.alireza.core.domain.model.UseCaseModel
 import com.alireza.core.domain.usecase.FlowUseCase
-import com.alireza.picture.domain.repository.model.recentPhoto.RecentPhoto
-import com.alireza.picture.domain.repository.model.recentPhoto.RecentPhotoMapper
+import com.alireza.picture.domain.model.recentPhoto.RecentPhoto
+import com.alireza.picture.domain.model.recentPhoto.RecentPhotoMapper
 import com.alireza.picture.domain.repository.recentPhoto.RecentPhotoRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

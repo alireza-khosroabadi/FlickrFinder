@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alireza.core.extentions.loadImage
 import com.alireza.picture.databinding.ListItemRecentPhotoLayoutBinding
-import com.alireza.picture.domain.repository.model.recentPhoto.RecentPhoto
+import com.alireza.picture.domain.model.recentPhoto.RecentPhoto
 
 class RecentPhotoListAdapter : RecyclerView.Adapter<RecentPhotoListAdapter.ViewHolder>() {
 

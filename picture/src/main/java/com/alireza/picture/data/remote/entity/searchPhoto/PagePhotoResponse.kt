@@ -1,7 +1,6 @@
-package com.alireza.picture.data.remote.entity.pagePhoto
+package com.alireza.picture.data.remote.entity.searchPhoto
 
 import com.alireza.core.data.remote.entity.ResponseModel
-import com.alireza.picture.data.remote.entity.photo.PhotoResponse
 import com.google.gson.annotations.SerializedName
 
 data class PagePhotoResponse(
