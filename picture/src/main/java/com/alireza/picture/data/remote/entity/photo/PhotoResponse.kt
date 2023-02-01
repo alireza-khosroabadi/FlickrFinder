@@ -1,6 +1,6 @@
 package com.alireza.picture.data.remote.entity.photo
 
-import com.alireza.core.base.data.remote.entity.ResponseModel
+import com.alireza.core.data.remote.entity.ResponseModel
 import com.google.gson.annotations.SerializedName
 
 data class PhotoResponse(
@@ -13,8 +13,8 @@ data class PhotoResponse(
     @SerializedName("ispublic" ) var isPublic : Int,
     @SerializedName("isfriend" ) var isFriend : Int,
     @SerializedName("isfamily" ) var isFamily : Int,
-    @SerializedName("url_s"    ) var urlS     : String,
-    @SerializedName("height_s" ) var heightS  : String,
-    @SerializedName("width_s"  ) var widthS   : String
+    @SerializedName("url_s"    ) var urlS     : String?,
+    @SerializedName("height_s" ) var heightS  : String?,
+    @SerializedName("width_s"  ) var widthS   : String?
 
-):ResponseModel
+): ResponseModel

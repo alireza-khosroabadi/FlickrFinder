@@ -1,11 +1,11 @@
 package com.alireza.picture.domain.repository.useCase.recentPhoto
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.alireza.core.base.data.repository.DataModel
-import com.alireza.core.base.data.repository.ErrorModel
-import com.alireza.core.base.data.repository.ExceptionModel
-import com.alireza.core.base.data.repository.Success
-import com.alireza.core.base.domain.model.UseCaseModel
+import com.alireza.core.data.repository.DataModel
+import com.alireza.core.data.repository.ErrorModel
+import com.alireza.core.data.repository.ExceptionModel
+import com.alireza.core.data.repository.Success
+import com.alireza.core.domain.model.UseCaseModel
 import com.alireza.picture.data.fakeData.fakeRecentPhotoEntityList
 import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntity
 import com.alireza.picture.domain.repository.model.recentPhoto.RecentPhoto
@@ -48,7 +48,7 @@ private val recentPhotoUseCase: RecentPhotoUseCase by lazy {
         recentPhotoUseCase.invoke(Unit).collect{useCaseModel ->
             assertEquals(
                 "1",
-                (useCaseModel as UseCaseModel.Success<List<RecentPhoto>>).data[0].id
+                (useCaseModel as UseCaseModel.Success).data[0].id
             )
         }
 
@@ -64,7 +64,7 @@ private val recentPhotoUseCase: RecentPhotoUseCase by lazy {
         }
 
         recentPhotoUseCase.invoke(Unit).collect { useCaseModel ->
-            assertEquals(1, (useCaseModel as UseCaseModel.Error<*>).code)
+            assertEquals(1, (useCaseModel as UseCaseModel.Error).code)
         }
     }
 

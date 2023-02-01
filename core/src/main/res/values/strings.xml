@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="empty_state_view_hint">There are no items to display</string>
+    <string name="empty_state_view_error">Error load data</string>
+    <string name="empty_state_view_btn">Retry</string>
+</resources>

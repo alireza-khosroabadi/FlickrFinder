@@ -1,7 +1,7 @@
 package com.alireza.picture.data.repository.recentPhoto
 
-import com.alireza.core.base.data.repository.DataModel
-import com.alireza.core.base.data.repository.offlinePattern.networkBoundResource
+import com.alireza.core.data.repository.DataModel
+import com.alireza.core.data.repository.offlinePattern.networkBoundResource
 import com.alireza.picture.data.local.dao.recentPhoto.RecentPhotoDao
 import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntity
 import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntityMapper
@@ -21,7 +21,8 @@ class RecentPhotoRepositoryImpl @Inject constructor(
         fetch = { pictureApiService.recentPhoto() },
         saveFetchResult = { requestType ->
             recentPhotoDao.insert(
-                requestType.photos.photo.map { data -> recentPhotoMapper.toEntityModel(data) }
+                requestType.photos.photo.filter { photo -> photo.urlS != null }
+                    .map { data -> recentPhotoMapper.toEntityModel(data) }
             )
         }
     ) { true }

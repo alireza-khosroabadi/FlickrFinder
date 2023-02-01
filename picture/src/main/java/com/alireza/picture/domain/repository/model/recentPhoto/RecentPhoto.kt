@@ -1,6 +1,6 @@
 package com.alireza.picture.domain.repository.model.recentPhoto
 
-import com.alireza.core.base.domain.model.DomainModel
+import com.alireza.core.domain.model.DomainModel
 
 data class RecentPhoto(
     val id: String = "",

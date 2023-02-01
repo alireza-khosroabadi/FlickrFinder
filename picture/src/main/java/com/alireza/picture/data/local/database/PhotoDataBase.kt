@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.alireza.core.base.data.local.converter.DateConverter
+import com.alireza.core.data.local.converter.DateConverter
 import com.alireza.picture.data.local.dao.recentPhoto.RecentPhotoDao
 import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntity
 

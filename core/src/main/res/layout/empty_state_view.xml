@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/empty_state_icon"
+        android:layout_width="@dimen/fix_size_150dp"
+        android:layout_height="@dimen/fix_size_150dp"
+        android:src="@drawable/ic_empty_state" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/empty_state_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_32dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:text="@string/empty_state_view_hint"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/empty_state_caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_32dp"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/empty_state_view_button"
+        style="@style/ThemeOverlay.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fix_size_32dp"
+        android:text="@string/empty_state_view_btn" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
