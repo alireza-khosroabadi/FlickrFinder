@@ -21,8 +21,7 @@ class RecentPhotoRepositoryImpl @Inject constructor(
         fetch = { pictureApiService.recentPhoto() },
         saveFetchResult = { requestType ->
             recentPhotoDao.insert(
-                requestType.photos.photo.filter { photo -> photo.urlS != null }
-                    .map { data -> recentPhotoMapper.toEntityModel(data) }
+                requestType.photos.photo.map { data -> recentPhotoMapper.toEntityModel(data) }
             )
         }
     ) { true }

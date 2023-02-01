@@ -1,6 +1,7 @@
 package com.alireza.core.extentions
 
 import android.widget.ImageView
+import com.alireza.core.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -13,9 +14,10 @@ fun ImageView.loadImage(url: String){
         .load(url)
         .apply(RequestOptions.bitmapTransform(RoundedCorners(ROUNDED_CORNERS_24)))
         .apply(RequestOptions().override(400, 400))
+        .error(R.drawable.ic_photo_load_error)
+        .placeholder(R.drawable.ic_load_photo)
         .diskCacheStrategy(DiskCacheStrategy.DATA)
         .skipMemoryCache(false)
-        .centerCrop()
         .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE))
         .into(this)
 }

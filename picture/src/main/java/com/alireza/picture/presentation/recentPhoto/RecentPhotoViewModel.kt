@@ -22,7 +22,7 @@ class RecentPhotoViewModel @Inject constructor(private val getRecentPhoto: Recen
         loadRecentPhoto()
     }
 
-    private fun loadRecentPhoto() {
+    fun loadRecentPhoto() {
         viewModelScope.launch {
             getRecentPhoto.invoke(Unit).flowOn(Dispatchers.IO)
                 .map { useCaseModel ->
