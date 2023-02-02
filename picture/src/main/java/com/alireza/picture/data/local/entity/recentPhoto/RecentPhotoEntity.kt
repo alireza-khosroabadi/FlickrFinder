@@ -8,6 +8,7 @@ import com.alireza.core.data.local.entity.EntityModel
 data class RecentPhotoEntity(
     val id: String = "",
     val owner: String = "",
+    val ownerName: String = "",
     val secret: String = "",
     val server: String = "",
     val farm: Int = 0,

@@ -3,7 +3,7 @@ package com.alireza.picture.presentation.recentPhoto
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alireza.core.domain.model.UseCaseModel
-import com.alireza.picture.domain.repository.useCase.recentPhoto.RecentPhotoUseCase
+import com.alireza.picture.domain.useCase.recentPhoto.RecentPhotoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

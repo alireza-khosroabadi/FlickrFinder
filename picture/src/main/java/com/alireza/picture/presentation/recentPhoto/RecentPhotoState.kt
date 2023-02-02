@@ -1,6 +1,6 @@
 package com.alireza.picture.presentation.recentPhoto
 
-import com.alireza.picture.domain.repository.model.recentPhoto.RecentPhoto
+import com.alireza.picture.domain.model.recentPhoto.RecentPhoto
 
 sealed class RecentPhotoState
 

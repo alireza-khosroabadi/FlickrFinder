@@ -8,7 +8,20 @@
 
     <fragment
         android:id="@+id/recentPhotoFragment"
-        tools:layout="@layout/fragment_recent_photo"
         android:name="com.alireza.picture.presentation.recentPhoto.RecentPhotoFragment"
-        android:label="RecentPhotoFragment" />
+        android:label="RecentPhotoFragment"
+        tools:layout="@layout/fragment_recent_photo">
+        <action
+            android:id="@+id/action_recentPhotoFragment_to_searchPhotoFragment"
+            app:destination="@id/searchPhotoFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/searchPhotoFragment"
+        android:name="com.alireza.picture.presentation.searchPhoto.SearchPhotoFragment"
+        android:label="SearchPhotoFragment"
+        tools:layout="@layout/fragment_search_photo" />
+
+
 </navigation>

@@ -7,9 +7,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.alireza.core.extentions.safeNavigation
 import com.alireza.core.presentation.fragment.BaseObserverFragment
+import com.alireza.picture.R
 import com.alireza.picture.databinding.FragmentRecentPhotoBinding
-import com.alireza.picture.domain.repository.model.recentPhoto.RecentPhoto
+import com.alireza.picture.domain.model.recentPhoto.RecentPhoto
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -21,7 +23,7 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
 
     override fun observe() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.RESUMED){
 
                 recentPhotoViewModel.recentPhotoState.collect{data ->
                     when(data){
@@ -44,6 +46,7 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
     }
 
     private fun showError(data: Throwable) {
+        //TODO Error handling with costume Classes
         showLoading(false)
         binding.emptyState.isVisible = false
         binding.errorState.isVisible = true
@@ -75,6 +78,15 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
     private fun setupListeners() {
         emptyStateListener()
         errorStateListener()
+        searchClickListener()
+    }
+
+    private fun searchClickListener() {
+        binding.imgSearch.setOnClickListener {
+            RecentPhotoFragmentDirections.actionRecentPhotoFragmentToSearchPhotoFragment().also {action ->
+                safeNavigation(action, R.id.recentPhotoFragment )
+            }
+        }
     }
 
     private fun initializeRecentPhotoListRecyclerView() {
