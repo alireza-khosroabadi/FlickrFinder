@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- FragmentRecentPhoto -->
+    <string name="fragmentRecentPhoto_title">Recent Photos</string>
+
+
+    <!-- FragmentSearchPhoto -->
+    <string name="fragmentSearchPhoto_search">search</string>
+    <string name="fragmentSearchPhoto_clear_history">clear history</string>
+    <string name="fragmentSearchPhoto_sample_search_history">Sea</string>
+</resources>

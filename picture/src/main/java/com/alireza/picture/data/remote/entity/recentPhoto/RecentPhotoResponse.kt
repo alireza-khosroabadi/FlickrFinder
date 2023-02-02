@@ -1,8 +1,6 @@
 package com.alireza.picture.data.remote.entity.recentPhoto
 
-import com.alireza.core.base.data.remote.entity.BaseResponseModel
-import com.alireza.core.base.data.remote.entity.ResponseModel
-import com.alireza.picture.data.remote.entity.pagePhoto.PagePhotoResponse
+import com.alireza.core.data.remote.entity.BaseResponseModel
 import com.google.gson.annotations.SerializedName
 
 data class RecentPhotoResponse(
@@ -11,4 +9,4 @@ data class RecentPhotoResponse(
     @SerializedName("code"   ) override var code   : Int,
     @SerializedName("message") override var message   : String
 
-):BaseResponseModel
+): BaseResponseModel

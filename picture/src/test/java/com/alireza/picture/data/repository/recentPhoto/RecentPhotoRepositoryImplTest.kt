@@ -1,8 +1,8 @@
 package com.alireza.picture.data.repository.recentPhoto
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.alireza.core.base.data.repository.ErrorModel
-import com.alireza.core.base.data.repository.Success
+import com.alireza.core.data.repository.ErrorModel
+import com.alireza.core.data.repository.Success
 import com.alireza.picture.data.fakeData.fakeRecentPhotoEntityListFlow
 import com.alireza.picture.data.fakeData.fakeRecentPhotoEntityResponse
 import com.alireza.picture.data.fakeData.fakeRecentPhotoFailedFlow

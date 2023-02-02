@@ -1,6 +1,9 @@
 package com.alireza.picture.di
 
 import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntityMapper
+import com.alireza.picture.domain.model.recentPhoto.RecentPhotoMapper
+import com.alireza.picture.domain.model.searchHistory.SearchHistoryMapper
+import com.alireza.picture.domain.model.searchPhoto.SearchPhotoMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,4 +14,13 @@ import dagger.hilt.components.SingletonComponent
 object MapperModule {
     @Provides
     fun provideRecentPhotoEntityMapper():RecentPhotoEntityMapper = RecentPhotoEntityMapper()
+
+    @Provides
+    fun provideRecentPhotoMapper(): RecentPhotoMapper = RecentPhotoMapper()
+
+    @Provides
+    fun provideSearchPhotoMapper(): SearchPhotoMapper = SearchPhotoMapper()
+
+    @Provides
+    fun provideSearchHistoryMapper(): SearchHistoryMapper = SearchHistoryMapper()
 }

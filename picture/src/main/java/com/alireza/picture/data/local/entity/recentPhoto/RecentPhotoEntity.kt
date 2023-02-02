@@ -2,12 +2,13 @@ package com.alireza.picture.data.local.entity.recentPhoto
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.alireza.core.base.data.local.entity.EntityModel
+import com.alireza.core.data.local.entity.EntityModel
 
 @Entity(tableName = "recent_photo_table")
 data class RecentPhotoEntity(
-    @PrimaryKey val id: String = "",
+    val id: String = "",
     val owner: String = "",
+    val ownerName: String = "",
     val secret: String = "",
     val server: String = "",
     val farm: Int = 0,
@@ -18,4 +19,6 @@ data class RecentPhotoEntity(
     val url: String = "",
     val height: Int = 0,
     val width: Int = 0
-) : EntityModel
+) : EntityModel{
+    @PrimaryKey(autoGenerate = true) var _dbId: Long = 0L
+}

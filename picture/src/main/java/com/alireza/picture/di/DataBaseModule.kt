@@ -23,4 +23,9 @@ object DataBaseModule {
         photoDataBase.recentPhotoDao()
 
 
+    @Provides
+    fun provideSearchHistoryDao(photoDataBase: PhotoDataBase) =
+        photoDataBase.searchHistoryDao()
+
+
 }
