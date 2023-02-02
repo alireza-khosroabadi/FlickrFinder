@@ -5,7 +5,7 @@ import com.alireza.core.data.repository.ExceptionModel
 import com.alireza.core.data.repository.Success
 import com.alireza.core.domain.model.UseCaseModel
 import com.alireza.core.domain.usecase.FlowUseCase
-import com.alireza.picture.data.param.SearchPhotoParam
+import com.alireza.picture.data.param.searchPhoto.SearchPhotoParam
 import com.alireza.picture.domain.model.searchPhoto.SearchPhoto
 import com.alireza.picture.domain.model.searchPhoto.SearchPhotoMapper
 import com.alireza.picture.domain.repository.searchPhoto.SearchPhotoRepository

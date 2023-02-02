@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_recentPhotoFragment_to_searchPhotoFragment"
             app:destination="@id/searchPhotoFragment" />
+        <action
+            android:id="@+id/action_recentPhotoFragment_to_photoDetailFragment"
+            app:destination="@id/photoDetailFragment" />
     </fragment>
 
 
@@ -21,7 +24,25 @@
         android:id="@+id/searchPhotoFragment"
         android:name="com.alireza.picture.presentation.searchPhoto.SearchPhotoFragment"
         android:label="SearchPhotoFragment"
-        tools:layout="@layout/fragment_search_photo" />
+        tools:layout="@layout/fragment_search_photo">
+        <action
+            android:id="@+id/action_searchPhotoFragment_to_photoDetailFragment"
+            app:destination="@id/photoDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/photoDetailFragment"
+        android:name="com.alireza.picture.presentation.photoDetail.PhotoDetailFragment"
+        android:label="PhotoDetailFragment"
+        tools:layout="@layout/fragment_photo_detail">
+        <argument
+            android:name="photoId"
+            app:argType="string"
+            app:nullable="false" />
+        <argument
+            android:name="url"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
 
 
 </navigation>

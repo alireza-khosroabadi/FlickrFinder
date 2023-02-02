@@ -4,9 +4,11 @@ import com.alireza.picture.data.local.dao.recentPhoto.RecentPhotoDao
 import com.alireza.picture.data.local.dao.searchHistory.SearchHistoryDao
 import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntityMapper
 import com.alireza.picture.data.remote.api.PictureApiService
+import com.alireza.picture.data.repository.photoDetail.PhotoDetailRepositoryImpl
 import com.alireza.picture.data.repository.recentPhoto.RecentPhotoRepositoryImpl
 import com.alireza.picture.data.repository.searchHistory.SearchHistoryRepositoryImpl
 import com.alireza.picture.data.repository.searchPhoto.SearchPhotoRepositoryImpl
+import com.alireza.picture.domain.repository.photoDetail.PhotoDetailRepository
 import com.alireza.picture.domain.repository.recentPhoto.RecentPhotoRepository
 import com.alireza.picture.domain.repository.searchHistory.SearchHistoryRepository
 import com.alireza.picture.domain.repository.searchPhoto.SearchPhotoRepository
@@ -41,4 +43,11 @@ object RepositoryModule {
         searchHistoryDao: SearchHistoryDao
     ): SearchHistoryRepository =
         SearchHistoryRepositoryImpl(searchHistoryDao)
+
+    @Provides
+    fun providePhotoDetailRepository(
+        apiService: PictureApiService
+    ): PhotoDetailRepository =
+        PhotoDetailRepositoryImpl(apiService)
+
 }

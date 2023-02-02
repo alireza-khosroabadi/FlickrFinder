@@ -11,6 +11,7 @@ data class RecentPhoto(
     val isFriend: Boolean = false,
     val isFamily: Boolean = false,
     val url: String = "",
+    val urlLarge: String = "",
     val height: Int = 0,
     val width: Int = 0,
     val isFavorite: Boolean = false

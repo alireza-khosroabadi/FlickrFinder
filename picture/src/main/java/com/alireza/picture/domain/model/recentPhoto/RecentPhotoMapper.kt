@@ -14,6 +14,7 @@ class RecentPhotoMapper : DomainModelMapper<RecentPhoto, RecentPhotoEntity> {
             isFavorite = isFriend,
             isFamily = isFamily,
             url = url,
+            urlLarge = urlLarge,
             height = height,
             width = width
         )

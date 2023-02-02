@@ -13,7 +13,7 @@ import com.alireza.picture.data.local.entity.searchHistory.SearchHistoryEntity
 
 @Database(
     entities = [RecentPhotoEntity::class, SearchHistoryEntity::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(DateConverter::class)
 abstract class PhotoDataBase : RoomDatabase() {
