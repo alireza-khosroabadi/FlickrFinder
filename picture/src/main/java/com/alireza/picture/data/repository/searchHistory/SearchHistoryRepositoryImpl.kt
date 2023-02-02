@@ -10,4 +10,12 @@ class SearchHistoryRepositoryImpl @Inject constructor(private val searchHistoryD
     SearchHistoryRepository {
     override fun searchHistory(): Flow<List<SearchHistoryEntity>> =
         searchHistoryDao.recentSearch()
+
+    override fun removeHistory(searchHistoryEntity: SearchHistoryEntity) {
+        searchHistoryDao.delete(searchHistoryEntity)
+    }
+
+    override fun clearAllHistory() {
+        searchHistoryDao.clearTable()
+    }
 }

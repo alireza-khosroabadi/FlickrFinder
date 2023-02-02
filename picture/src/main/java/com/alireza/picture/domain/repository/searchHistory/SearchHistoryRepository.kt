@@ -5,4 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface SearchHistoryRepository {
     fun searchHistory():Flow<List<SearchHistoryEntity>>
+    fun removeHistory(searchHistoryEntity: SearchHistoryEntity)
+    fun clearAllHistory()
 }

@@ -5,5 +5,5 @@ import com.alireza.picture.data.local.entity.searchHistory.SearchHistoryEntity
 
 class SearchHistoryMapper : DomainModelMapper<SearchHistory, SearchHistoryEntity> {
     override fun toDomainModel(dataModel: SearchHistoryEntity): SearchHistory =
-        with(dataModel) { SearchHistory(_id, query) }
+        with(dataModel) { SearchHistory( query) }
 }

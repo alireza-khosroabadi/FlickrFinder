@@ -1,4 +1,4 @@
-package com.alireza.picture.domain.repository.useCase.recentPhoto
+package com.alireza.picture.domain.useCase.recentPhoto
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.alireza.core.data.repository.DataModel

@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 abstract class SearchHistoryDao:BaseDao<SearchHistoryEntity> {
 
-    @Query("SELECT * FROM SEARCH_HISTORY_TABLE ORDER BY _id DESC")
+    @Query("SELECT * FROM SEARCH_HISTORY_TABLE ORDER BY date DESC LIMIT 5")
     abstract fun recentSearch(): Flow<List<SearchHistoryEntity>>
+
+    @Query("DELETE FROM SEARCH_HISTORY_TABLE")
+    abstract fun clearTable()
 }

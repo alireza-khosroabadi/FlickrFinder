@@ -10,6 +10,6 @@ interface PictureApiService {
     @GET(RECENT_PHOTO_URL)
     suspend fun recentPhoto(): RecentPhotoResponse
 
-    @GET(RECENT_PHOTO_URL)
+    @GET(SEARCH_PHOTO_URL)
     suspend fun searchPhoto(@Query("text") text: String): SearchPhotoResponse
 }
