@@ -9,6 +9,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alireza.core.data.error.AppError
 import com.alireza.core.extentions.hideKeyBoard
 import com.alireza.core.extentions.safeNavigation
 import com.alireza.core.presentation.fragment.BaseObserverFragment
@@ -77,7 +78,7 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
     private fun setupSearchPhotoRecyclerView() {
         with(binding.rvSearchPhotoList) {
             layoutManager =
-                GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = searchPhotoAdapter
         }
     }
@@ -119,7 +120,7 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
                 mViewModel.errorState.collect { error ->
                     when (error) {
                         is ErrorState -> showError(error.message)
-                        is ExceptionState -> showError(error.throwable)
+                        is ExceptionState -> showError(error.error)
                     }
                 }
             }
@@ -198,12 +199,11 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
         binding.imgBack.setOnClickListener { findNavController().navigateUp() }
     }
 
-    private fun showError(data: Throwable) {
-        //TODO Error handling with costume Classes
+    private fun showError(data: AppError) {
         showLoading(false)
         binding.emptyState.isVisible = false
         binding.errorState.isVisible = true
-        binding.errorState.setCaption(data.localizedMessage)
+        binding.errorState.setAppError(data)
     }
 
     private fun showError(message: String) {

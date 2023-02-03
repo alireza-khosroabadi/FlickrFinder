@@ -1,5 +1,6 @@
 package com.alireza.picture.domain.useCase.searchPhoto
 
+import com.alireza.core.data.error.getAppError
 import com.alireza.core.data.repository.ErrorModel
 import com.alireza.core.data.repository.ExceptionModel
 import com.alireza.core.data.repository.Success
@@ -27,7 +28,7 @@ class SearchPhotoUseCase @Inject constructor(
                         it.code,
                         it.message ?: ""
                     )
-                    is ExceptionModel -> UseCaseModel.Exception(it.e)
+                    is ExceptionModel -> UseCaseModel.Exception(it.e.getAppError())
                     is Success -> {
                         val mappedData = it.data.map { data ->
                             mapper.toDomainModel(

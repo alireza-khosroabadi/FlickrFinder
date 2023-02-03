@@ -28,27 +28,31 @@
         android:id="@+id/img_favorite"
         android:layout_width="@dimen/icon_size_24dp"
         android:layout_height="@dimen/icon_size_24dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
         android:src="@drawable/ic_no_favorite"
         app:layout_constraintBottom_toBottomOf="@id/tv_title"
         app:layout_constraintEnd_toStartOf="@id/img_search"
-        android:layout_marginEnd="@dimen/margin_16dp"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toEndOf="@id/tv_title"
         app:layout_constraintTop_toTopOf="@id/tv_title" />
 
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_photo_list"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_to_refresh"
         android:layout_width="match_parent"
         android:layout_height="@dimen/fix_size_0dp"
         android:layout_marginTop="@dimen/margin_16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        app:spanCount="3"
-        tools:itemCount="20"
-        tools:listitem="@layout/list_item_recent_photo_layout" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_photo_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:itemCount="3"
+            tools:listitem="@layout/list_item_recent_photo_layout" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/progress_loading"

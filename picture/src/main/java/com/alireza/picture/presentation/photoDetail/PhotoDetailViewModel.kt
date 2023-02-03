@@ -48,7 +48,7 @@ class PhotoDetailViewModel @Inject constructor(
                 if (photoDetail is UseCaseModel.Error)
                     ErrorState(photoDetail.code, photoDetail.message)
                 if (photoDetail is UseCaseModel.Exception)
-                    ExceptionState(photoDetail.exception)
+                    ExceptionState(photoDetail.error)
                 else {
                     PhotoState((photoDetail as UseCaseModel.Success).data.apply {
                         url = imageUrl

@@ -1,5 +1,6 @@
 package com.alireza.picture.domain.useCase.photoDetail
 
+import com.alireza.core.data.error.getAppError
 import com.alireza.core.data.repository.ErrorModel
 import com.alireza.core.data.repository.ExceptionModel
 import com.alireza.core.data.repository.Success
@@ -26,7 +27,7 @@ class PhotoDetailUseCase @Inject constructor(
                         it.code,
                         it.message ?: ""
                     )
-                    is ExceptionModel -> UseCaseModel.Exception(it.e)
+                    is ExceptionModel -> UseCaseModel.Exception(it.e.getAppError())
                     is Success -> UseCaseModel.Success(mapper.toDomainModel(it.data))
                 }
             }

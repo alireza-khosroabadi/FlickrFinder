@@ -8,9 +8,6 @@ import androidx.annotation.RequiresApi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class InternetConnectionException(override val message:String="No Access To Internet"):Exception()
-
-
 class NetworkConnectivity @Inject constructor(@ApplicationContext private val context: Context) {
     fun isInternetOn(): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
