@@ -3,6 +3,7 @@ package com.alireza.picture.presentation.recentPhoto
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alireza.core.domain.model.UseCaseModel
+import com.alireza.picture.data.param.shouldFetch.ShouldFetchParam
 import com.alireza.picture.domain.useCase.recentPhoto.RecentPhotoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -22,9 +23,9 @@ class RecentPhotoViewModel @Inject constructor(private val getRecentPhoto: Recen
         loadRecentPhoto()
     }
 
-    fun loadRecentPhoto() {
+    fun loadRecentPhoto(forceToFetch:Boolean=false) {
         viewModelScope.launch {
-            getRecentPhoto.invoke(Unit).flowOn(Dispatchers.IO)
+            getRecentPhoto.invoke(ShouldFetchParam(forceToFetch)).flowOn(Dispatchers.IO)
                 .map { useCaseModel ->
                     when (useCaseModel) {
                         is UseCaseModel.Success -> RecentPhotoList(useCaseModel.data)

@@ -140,7 +140,7 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
         with(binding) {
             swipeToRefreshState(isRefreshing = false, isEnable = false)
             swipeToRefresh.setOnRefreshListener {
-                recentPhotoViewModel.loadRecentPhoto()
+                recentPhotoViewModel.loadRecentPhoto(true)
             }
         }
     }
@@ -153,13 +153,13 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
 
     private fun emptyStateListener() {
         binding.emptyState.setOnButtonClickListener {
-            recentPhotoViewModel.loadRecentPhoto()
+            recentPhotoViewModel.loadRecentPhoto(true)
         }
     }
 
     private fun errorStateListener() {
         binding.errorState.setOnButtonClickListener {
-            recentPhotoViewModel.loadRecentPhoto()
+            recentPhotoViewModel.loadRecentPhoto(true)
         }
     }
 }

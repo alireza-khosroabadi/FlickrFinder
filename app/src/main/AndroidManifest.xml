@@ -13,7 +13,7 @@
         android:name=".base.BaseApplication"
         tools:targetApi="31">
         <activity
-            android:name="com.alireza.picture.presentation.activity.FlickrPhotoActivity"
+            android:name=".presentation.splash.SplashActivity"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>

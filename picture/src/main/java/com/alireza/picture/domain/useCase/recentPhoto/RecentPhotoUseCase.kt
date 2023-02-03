@@ -6,6 +6,7 @@ import com.alireza.core.data.repository.ExceptionModel
 import com.alireza.core.data.repository.Success
 import com.alireza.core.domain.model.UseCaseModel
 import com.alireza.core.domain.usecase.FlowUseCase
+import com.alireza.picture.data.param.shouldFetch.ShouldFetchParam
 import com.alireza.picture.domain.model.recentPhoto.RecentPhoto
 import com.alireza.picture.domain.model.recentPhoto.RecentPhotoMapper
 import com.alireza.picture.domain.repository.recentPhoto.RecentPhotoRepository
@@ -16,11 +17,11 @@ import javax.inject.Inject
 class RecentPhotoUseCase @Inject constructor(
     private val recentPhotoRepository: RecentPhotoRepository,
     private val recentPhotoMapper: RecentPhotoMapper
-) : FlowUseCase<Unit, List<RecentPhoto>>() {
+) : FlowUseCase<ShouldFetchParam, List<RecentPhoto>>() {
     override fun execute(
-        parameters: Unit
+        parameters: ShouldFetchParam
     ): Flow<UseCaseModel<List<RecentPhoto>>> {
-        return recentPhotoRepository.recentPhoto()
+        return recentPhotoRepository.recentPhoto(parameters)
             .map {
                 when (it) {
                     is ErrorModel -> UseCaseModel.Error(

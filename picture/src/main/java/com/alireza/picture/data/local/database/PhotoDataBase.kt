@@ -9,20 +9,23 @@ import com.alireza.core.data.local.converter.DateConverter
 import com.alireza.picture.data.local.dao.favoritePhoto.FavoritePhotoDao
 import com.alireza.picture.data.local.dao.recentPhoto.RecentPhotoDao
 import com.alireza.picture.data.local.dao.searchHistory.SearchHistoryDao
+import com.alireza.picture.data.local.dao.updateTable.UpdateTableDao
 import com.alireza.picture.data.local.entity.photoDetail.PhotoDetailEntity
 import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntity
 import com.alireza.picture.data.local.entity.searchHistory.SearchHistoryEntity
+import com.alireza.picture.data.local.entity.updateTable.UpdateTableEntity
 
 @Database(
-    entities = [RecentPhotoEntity::class, SearchHistoryEntity::class, PhotoDetailEntity::class],
-    version = 3
+    entities = [RecentPhotoEntity::class, SearchHistoryEntity::class, PhotoDetailEntity::class, UpdateTableEntity::class],
+    version = 4
 )
 @TypeConverters(DateConverter::class)
 abstract class PhotoDataBase : RoomDatabase() {
 
-    abstract fun recentPhotoDao():RecentPhotoDao
-    abstract fun searchHistoryDao():SearchHistoryDao
-    abstract fun favoritePhotoDao():FavoritePhotoDao
+    abstract fun recentPhotoDao(): RecentPhotoDao
+    abstract fun searchHistoryDao(): SearchHistoryDao
+    abstract fun favoritePhotoDao(): FavoritePhotoDao
+    abstract fun updateTableDao(): UpdateTableDao
 
     companion object {
         @Volatile

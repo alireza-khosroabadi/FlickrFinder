@@ -32,4 +32,8 @@ object DataBaseModule {
     fun provideFavoritePhotoDao(photoDataBase: PhotoDataBase) =
         photoDataBase.favoritePhotoDao()
 
+    @Provides
+    fun provideUpdateTableDao(photoDataBase: PhotoDataBase) =
+        photoDataBase.updateTableDao()
+
 }
