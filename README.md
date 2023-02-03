@@ -62,7 +62,7 @@ Recent Photo                |  Search History
 
 Search Photo                |  Favorite Photo
 :-------------------------:|:-------------------------:
-<img src="https://github.com/alireza-khosroabadi/FlickrFinderApp/blob/master/screenshots/3.jpg" width="280">  | <img src="https://github.com/alireza-khosroabadi/FlickrFinderApp/blob/master/screenshots/3.jpg" width="280">
+<img src="https://github.com/alireza-khosroabadi/FlickrFinderApp/blob/master/screenshots/3.jpg" width="280">  | <img src="https://github.com/alireza-khosroabadi/FlickrFinderApp/blob/master/screenshots/4.jpg" width="280">
 
 
 
