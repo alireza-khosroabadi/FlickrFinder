@@ -8,6 +8,7 @@ import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.alireza.core.R
+import com.alireza.core.data.error.AppError
 import com.alireza.core.databinding.EmptyStateViewBinding
 
 
@@ -110,6 +111,14 @@ class EmptyStateView @JvmOverloads constructor(
 
     fun setIcon(@DrawableRes resId:Int){
         mBinding.emptyStateIcon.setImageResource(resId)
+    }
+
+    /**
+     * For this method and error type we should expand it to load more types and diffrence between error types.
+     * */
+    fun setAppError(appError: AppError){
+        mBinding.emptyStateIcon.setImageResource(appError.icon)
+        mBinding.emptyStateTitle.setText(appError.title)
     }
 
 }

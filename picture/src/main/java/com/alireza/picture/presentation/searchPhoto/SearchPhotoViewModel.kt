@@ -45,7 +45,7 @@ class SearchPhotoViewModel @Inject constructor(
                     when (useCaseModel) {
                         is UseCaseModel.Success -> SearchHistoryList(useCaseModel.data)
                         is UseCaseModel.Error -> ErrorState(useCaseModel.code, useCaseModel.message)
-                        is UseCaseModel.Exception -> ExceptionState(useCaseModel.exception)
+                        is UseCaseModel.Exception -> ExceptionState(useCaseModel.error)
                     }
                 }.stateIn(
                     scope = viewModelScope,
@@ -71,7 +71,7 @@ class SearchPhotoViewModel @Inject constructor(
                     when (useCaseModel) {
                         is UseCaseModel.Success -> SearchPhotoList(useCaseModel.data)
                         is UseCaseModel.Error -> ErrorState(useCaseModel.code, useCaseModel.message)
-                        is UseCaseModel.Exception -> ExceptionState(useCaseModel.exception)
+                        is UseCaseModel.Exception -> ExceptionState(useCaseModel.error)
                     }
                 }.stateIn(
                     scope = viewModelScope,

@@ -1,5 +1,6 @@
 package com.alireza.picture.di
 
+import com.alireza.core.tools.NetworkConnectivity
 import com.alireza.picture.data.local.dao.favoritePhoto.FavoritePhotoDao
 import com.alireza.picture.data.local.dao.recentPhoto.RecentPhotoDao
 import com.alireza.picture.data.local.dao.searchHistory.SearchHistoryDao
@@ -26,18 +27,20 @@ object RepositoryModule {
 
     @Provides
     fun provideRecentPhotoRepository(
+        connectionCheck: NetworkConnectivity,
         apiService: PictureApiService,
         recentPhotoDao: RecentPhotoDao,
         recentPhotoMapper: RecentPhotoEntityMapper
     ): RecentPhotoRepository =
-        RecentPhotoRepositoryImpl(apiService, recentPhotoDao, recentPhotoMapper)
+        RecentPhotoRepositoryImpl(connectionCheck,apiService, recentPhotoDao, recentPhotoMapper )
 
     @Provides
     fun provideSearchPhotoRepository(
+        internetConnection: NetworkConnectivity,
         apiService: PictureApiService,
         searchHistoryDao: SearchHistoryDao
     ): SearchPhotoRepository =
-        SearchPhotoRepositoryImpl(apiService, searchHistoryDao)
+        SearchPhotoRepositoryImpl(internetConnection, apiService, searchHistoryDao)
 
     @Provides
     fun provideSearchHistoryRepository(
@@ -47,9 +50,10 @@ object RepositoryModule {
 
     @Provides
     fun providePhotoDetailRepository(
+        internetConnection: NetworkConnectivity,
         apiService: PictureApiService
     ): PhotoDetailRepository =
-        PhotoDetailRepositoryImpl(apiService)
+        PhotoDetailRepositoryImpl(internetConnection,apiService)
 
     @Provides
     fun provideFavoritePhotoRepository(

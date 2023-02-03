@@ -5,6 +5,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alireza.core.extentions.safeNavigation
 import com.alireza.core.presentation.fragment.BaseObserverFragment
@@ -56,7 +57,7 @@ class FavoritePhotoFragment : BaseObserverFragment<FragmentFavoritePhotoBinding>
     private fun initializeRecyclerView() {
         with(binding.rvFavoritePhoto) {
             layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
             adapter = favoritePhotoListAdapter
         }
     }
