@@ -9,4 +9,16 @@
     <string name="fragmentSearchPhoto_search">search</string>
     <string name="fragmentSearchPhoto_clear_history">clear history</string>
     <string name="fragmentSearchPhoto_sample_search_history">Sea</string>
+
+
+    <!-- FragmentPhotoDetail -->
+    <string name="fragmentPhotoDetail_photo_title">Photo title:</string>
+    <string name="fragmentPhotoDetail_photo_owner">Photo owner:</string>
+    <string name="fragmentPhotoDetail_photo_date">Photo date:</string>
+    <string name="fragmentPhotoDetail_photo_location">Photo location:</string>
+    <string name="fragmentPhotoDetail_photo_description">Photo description:</string>
+
+
+    <!-- FragmentFavoritePhoto -->
+    <string name="fragmentFavoritePhoto_title">Favorite Photos</string>
 </resources>

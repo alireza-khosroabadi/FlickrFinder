@@ -31,6 +31,6 @@ abstract class BaseFragment<T: ViewBinding>():Fragment(){
     }
 
     abstract fun getViewBinding(): T
-    protected abstract fun setupViews()
     protected abstract fun donOnCreateView()
+    protected abstract fun setupViews()
 }

@@ -34,7 +34,6 @@ buildscript {
         def core_testing = "2.1.0"
         def swipere_fresh_layout_version = "1.1.0"
         def rxBinding_version = '4.0.0'
-        def shimmer_version = "0.5.0"
         def fragment_test_version = "1.5.5"
         def hamcrest_version = "2.2"
         def robolectric_version = "4.4"
@@ -77,7 +76,6 @@ buildscript {
                 "androidx.room:room-runtime:$room_version",
                 "androidx.navigation:navigation-fragment-ktx:$nav_version",
                 "androidx.navigation:navigation-ui-ktx:$nav_version",
-                "com.facebook.shimmer:shimmer:$shimmer_version",
                 "androidx.test.espresso:espresso-contrib:$espresso_contrib_version"
         ]
 
