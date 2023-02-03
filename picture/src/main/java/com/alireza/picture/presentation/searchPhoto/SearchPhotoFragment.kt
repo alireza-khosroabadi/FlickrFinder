@@ -39,6 +39,8 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
         setupOnBackClickListener()
         setupOnClearAllHistoryClickListener()
         setupPhotoAdapterListener()
+        emptyStateListener()
+        errorStateListener()
     }
 
 
@@ -201,6 +203,7 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
 
     private fun showError(data: AppError) {
         showLoading(false)
+        binding.historyGroup.isVisible = false
         binding.emptyState.isVisible = false
         binding.errorState.isVisible = true
         binding.errorState.setAppError(data)
@@ -208,8 +211,21 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
 
     private fun showError(message: String) {
         showLoading(false)
+        binding.historyGroup.isVisible = false
         binding.emptyState.isVisible = false
         binding.errorState.isVisible = true
         binding.errorState.setCaption(message)
+    }
+
+    private fun emptyStateListener() {
+        binding.emptyState.setOnButtonClickListener {
+            searchPhoto()
+        }
+    }
+
+    private fun errorStateListener() {
+        binding.errorState.setOnButtonClickListener {
+            searchPhoto()
+        }
     }
 }

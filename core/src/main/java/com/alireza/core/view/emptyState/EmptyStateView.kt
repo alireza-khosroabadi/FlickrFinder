@@ -1,4 +1,4 @@
-package com.alireza.core.view.view.emptyState
+package com.alireza.core.view.emptyState
 
 import android.content.Context
 import android.util.AttributeSet
