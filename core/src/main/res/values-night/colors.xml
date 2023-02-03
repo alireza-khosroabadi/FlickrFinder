@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFED7F5C</color>
+    <color name="color_primary">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="color_secondary">#FF03DAC5</color>
+    <color name="color_secondary_variant">#FF018786</color>
+    <color name="black">#FFFFFFFF</color>
+    <color name="color_primary_variant">#2B2A2A</color>
+    <color name="background">#FFF8F8FA</color>
+    <color name="boarder">#535353</color>
+    <color name="icon">#FFCFCFCF</color>
+    <color name="splash_background">#585859</color>
+</resources>

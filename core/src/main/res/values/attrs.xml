@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EmptyStateView">
+        <attr name="hint" format="reference|string" />
+        <attr name="buttonText" format="reference|string" />
+        <attr name="img" format="reference" />
+        <attr name="showButton" format="boolean" />
+        <attr name="showImage" format="boolean" />
+        <attr name="showHint" format="boolean" />
+    </declare-styleable>
+</resources>

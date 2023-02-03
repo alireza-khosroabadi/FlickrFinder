@@ -1,18 +1,36 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
+
+    applicationVariants.all { variant ->
+//        def flavor = variant.mergedFlavor
+        if (variant.buildType.isDebuggable()) {
+            //set properties for debug
+            variant.outputs.each { output ->
+                output.versionNameOverride = versionName + "-SNAPSHOT"
+            }
+        } else {
+            //set properties for release
+            variant.outputs.each { output ->
+                output.versionNameOverride = versionName
+            }
+        }
+    }
+
     namespace 'com.alireza.flickrfinder'
-    compileSdk 33
+    compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
         applicationId "com.alireza.flickrfinder"
-        minSdk 22
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        minSdk rootProject.ext.minimumSdkVersion
+        targetSdk rootProject.ext.targetSdkVersion
+        versionCode generateVersionCode()
+        versionName generateVersionName()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -20,6 +38,11 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            testCoverageEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -30,15 +53,34 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    kapt {
+        correctErrorTypes true
+    }
+    hilt {
+        enableTransformForLocalTests = true
+    }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
+    implementation project(path: ':core')
+    implementation project(path: ':picture')
+    implementation apiLibraries
+    kapt kaptLibraries
+    testImplementation testLibraries
+    androidTestImplementation androidTestLibraries
+    kaptAndroidTest androidKaptTestLibraries
+    debugImplementation debugLibraries
+}
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0'
-    implementation 'com.google.android.material:material:1.7.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+private Integer generateVersionCode(){
+    return versionMajor * 10000 + versionMinor * 100 + versionPatch
+}
+
+private String generateVersionName(){
+    String versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
+    return versionName
 }

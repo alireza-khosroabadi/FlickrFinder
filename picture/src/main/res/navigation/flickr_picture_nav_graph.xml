@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/flickr_picture_nav_graph"
+    app:startDestination="@id/recentPhotoFragment">
+
+
+    <fragment
+        android:id="@+id/recentPhotoFragment"
+        android:name="com.alireza.picture.presentation.recentPhoto.RecentPhotoFragment"
+        android:label="RecentPhotoFragment"
+        tools:layout="@layout/fragment_recent_photo">
+        <action
+            android:id="@+id/action_recentPhotoFragment_to_searchPhotoFragment"
+            app:destination="@id/searchPhotoFragment" />
+        <action
+            android:id="@+id/action_recentPhotoFragment_to_photoDetailFragment"
+            app:destination="@id/photoDetailFragment" />
+        <action
+            android:id="@+id/action_recentPhotoFragment_to_favoritePhotoFragment"
+            app:destination="@id/favoritePhotoFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/searchPhotoFragment"
+        android:name="com.alireza.picture.presentation.searchPhoto.SearchPhotoFragment"
+        android:label="SearchPhotoFragment"
+        tools:layout="@layout/fragment_search_photo">
+        <action
+            android:id="@+id/action_searchPhotoFragment_to_photoDetailFragment"
+            app:destination="@id/photoDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/photoDetailFragment"
+        android:name="com.alireza.picture.presentation.photoDetail.PhotoDetailFragment"
+        android:label="PhotoDetailFragment"
+        tools:layout="@layout/fragment_photo_detail">
+        <argument
+            android:name="photoId"
+            app:argType="string"
+            app:nullable="false" />
+        <argument
+            android:name="url"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritePhotoFragment"
+        tools:layout="@layout/fragment_favorite_photo"
+        android:name="com.alireza.picture.presentation.favoritePhoto.FavoritePhotoFragment"
+        android:label="FavoritePhotoFragment" >
+        <action
+            android:id="@+id/action_favoritePhotoFragment_to_photoDetailFragment"
+            app:destination="@id/photoDetailFragment" />
+    </fragment>
+
+
+</navigation>
