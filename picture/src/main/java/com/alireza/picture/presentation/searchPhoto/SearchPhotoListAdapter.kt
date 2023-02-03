@@ -35,9 +35,9 @@ class SearchPhotoListAdapter : RecyclerView.Adapter<SearchPhotoListAdapter.ViewH
     inner class ViewHolder(private val binding: ListItemSearchPhotoLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: SearchPhoto) {
-            binding.imgPhoto.loadImage(item.url)
+            binding.imgPhoto.loadImage(item.url, 400, 400)
             binding.imgPhoto.setOnClickListener {
-                onPhotoClick?.invoke(item.id, item.urlLarge)
+                onPhotoClick?.invoke(item.id, item.urlLarge.ifEmpty { item.url })
             }
         }
     }

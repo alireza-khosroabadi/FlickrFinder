@@ -4,5 +4,5 @@ import com.alireza.core.data.remote.entity.ResponseModel
 import com.google.gson.annotations.SerializedName
 
 class PhotoCommentsCountsResponse(
-    @SerializedName("_content" ) val count : Int
+    @SerializedName("_content" ) val count : Int?
 ): ResponseModel

@@ -1,12 +1,15 @@
 package com.alireza.picture.presentation.photoDetail
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alireza.core.extentions.loadImage
 import com.alireza.core.presentation.fragment.BaseObserverFragment
+import com.alireza.picture.R
 import com.alireza.picture.databinding.FragmentPhotoDetailBinding
 import com.alireza.picture.domain.model.photoDetail.PhotoDetail
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +24,8 @@ class PhotoDetailFragment : BaseObserverFragment<FragmentPhotoDetailBinding>() {
 
     override fun donOnCreateView() {
         args.photoId
+        setupOnBackClickListener()
+        setupFavoriteClickListener()
     }
 
     override fun getViewBinding(): FragmentPhotoDetailBinding =
@@ -37,6 +42,7 @@ class PhotoDetailFragment : BaseObserverFragment<FragmentPhotoDetailBinding>() {
                     when (state) {
                         Loading -> Unit
                         is PhotoState -> showPhoto(state.data)
+                        is IsFavoritePhoto -> setFavoriteIcon(state.isFavorite)
                     }
                 }
             }
@@ -44,6 +50,39 @@ class PhotoDetailFragment : BaseObserverFragment<FragmentPhotoDetailBinding>() {
     }
 
     private fun showPhoto(data: PhotoDetail) {
-        binding.imgPhoto.loadImage(data.url)
+        showLoading(false)
+        with(binding) {
+            imgPhoto.loadImage(data.url)
+            tvViewCount.text = data.views.toString()
+            tvCommentCount.text = data.commentsCount.toString()
+            tvOwner.text = data.ownerName
+            tvDate.text = data.postedDate
+            tvLocation.text = data.location
+            tvDescription.text = data.description
+            tvTitle.text = data.title
+            setFavoriteIcon(data.isFavorite)
+        }
     }
+
+    private fun setFavoriteIcon(isFavorite: Boolean) {
+        val favoriteIcon =
+            if (isFavorite) com.alireza.core.R.drawable.ic_favorite
+            else com.alireza.core.R.drawable.ic_no_favorite
+        binding.isFavorite.setImageResource(favoriteIcon)
+    }
+
+    private fun setupOnBackClickListener() {
+        binding.iconBack.setOnClickListener { findNavController().navigateUp() }
+    }
+
+    private fun showLoading(loading: Boolean) {
+        binding.progressLoading.isVisible = loading
+    }
+
+    private fun setupFavoriteClickListener() {
+        binding.isFavorite.setOnClickListener {
+            mViewModel.favoritePhoto()
+        }
+    }
+
 }

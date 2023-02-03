@@ -7,14 +7,14 @@ class PhotoDetailMapper : ResponseModelMapper<PhotoDetail, PhotoResponse> {
     override fun toDomainModel(dataModel: PhotoResponse): PhotoDetail = with(dataModel) {
         PhotoDetail(
             id = id,
-            isFavorite = isFavorite,
-            ownerName = owner.realName,
-            location = owner.location,
-            title = title.title,
-            description = description.description,
-            postedDate = dates.taken,
-            views = views,
-            commentsCount = comments.count
+            isFavorite = (isFavorite ?: 0) > 0,
+            ownerName = owner?.realName?:"",
+            location = owner?.location?:"",
+            title = title?.title?:"",
+            description = description?.description?:"",
+            postedDate = dates?.taken?:"",
+            views = views?:0,
+            commentsCount = comments?.count?:0
         )
     }
 }
