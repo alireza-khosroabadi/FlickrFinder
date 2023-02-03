@@ -30,7 +30,6 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
     override fun observe() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED){
-
                 recentPhotoViewModel.recentPhotoState.collect{data ->
                     when(data){
                         is Error -> showError(data.message)
@@ -44,33 +43,49 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
     }
 
     private fun showLoading(loading: Boolean) {
-        binding.progressLoading.isVisible = loading
-        if (loading) {
-            binding.emptyState.isVisible = false
-            binding.errorState.isVisible = false
+        with(binding){
+            swipeToRefresh.isRefreshing = false
+            swipeToRefresh.isEnabled = false
+            progressLoading.isVisible = loading
+            if (loading) {
+                emptyState.isVisible = false
+                errorState.isVisible = false
+            }
         }
     }
 
     private fun showError(data: Throwable) {
         //TODO Error handling with costume Classes
-        showLoading(false)
-        binding.emptyState.isVisible = false
-        binding.errorState.isVisible = true
-        binding.errorState.setCaption(data.localizedMessage)
+        with(binding){
+            showLoading(false)
+            emptyState.isVisible = false
+            errorState.isVisible = true
+            swipeToRefresh.isRefreshing = false
+            swipeToRefresh.isEnabled = true
+            errorState.setCaption(data.localizedMessage)
+        }
     }
 
     private fun showError(message: String) {
-        showLoading(false)
-        binding.emptyState.isVisible = false
-        binding.errorState.isVisible = true
-        binding.errorState.setCaption(message)
+        with(binding){
+            showLoading(false)
+            emptyState.isVisible = false
+            errorState.isVisible = true
+            swipeToRefresh.isRefreshing = false
+            swipeToRefresh.isEnabled = true
+            errorState.setCaption(message)
+        }
     }
 
     private fun showRecentPhoto(photoList: List<RecentPhoto>) {
-        showLoading(false)
-        binding.emptyState.isVisible = photoList.isEmpty()
-        binding.rvPhotoList.isVisible = binding.emptyState.isVisible.not()
-        recentPhotoAdapter.addPhoto(photoList)
+        with(binding){
+            showLoading(false)
+            swipeToRefresh.isRefreshing = false
+            swipeToRefresh.isEnabled = true
+            emptyState.isVisible = photoList.isEmpty()
+            rvPhotoList.isVisible = binding.emptyState.isVisible.not()
+            recentPhotoAdapter.addPhoto(photoList)
+        }
     }
 
     override fun getViewBinding(): FragmentRecentPhotoBinding =
@@ -79,6 +94,7 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
     override fun setupViews() {
         initializeRecentPhotoListRecyclerView()
         setupListeners()
+        setupSwipeToRefresh()
     }
 
     private fun setupListeners() {
@@ -120,6 +136,17 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
                 }
         }
     }
+
+    private fun setupSwipeToRefresh() {
+        with(binding){
+            swipeToRefresh.isRefreshing = false
+            swipeToRefresh.isEnabled = false
+            swipeToRefresh.setOnRefreshListener {
+                recentPhotoViewModel.loadRecentPhoto()
+            }
+        }
+    }
+
 
     private fun emptyStateListener() {
         binding.emptyState.setOnButtonClickListener {
