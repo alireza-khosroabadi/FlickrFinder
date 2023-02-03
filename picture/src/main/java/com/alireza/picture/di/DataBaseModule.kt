@@ -1,6 +1,7 @@
 package com.alireza.picture.di
 
 import android.content.Context
+import com.alireza.picture.data.local.dao.favoritePhoto.FavoritePhotoDao
 import com.alireza.picture.data.local.database.PhotoDataBase
 import dagger.Module
 import dagger.Provides
@@ -27,5 +28,8 @@ object DataBaseModule {
     fun provideSearchHistoryDao(photoDataBase: PhotoDataBase) =
         photoDataBase.searchHistoryDao()
 
+    @Provides
+    fun provideFavoritePhotoDao(photoDataBase: PhotoDataBase) =
+        photoDataBase.favoritePhotoDao()
 
 }

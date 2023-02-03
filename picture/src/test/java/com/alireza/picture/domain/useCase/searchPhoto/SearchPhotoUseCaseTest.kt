@@ -6,7 +6,7 @@ import com.alireza.picture.data.fakeData.fakeSearchPhotoEntityResponse
 import com.alireza.picture.data.fakeData.fakeSearchPhotoFailed
 import com.alireza.picture.data.local.dao.searchHistory.SearchHistoryDao
 import com.alireza.picture.data.local.entity.searchHistory.SearchHistoryEntity
-import com.alireza.picture.data.param.SearchPhotoParam
+import com.alireza.picture.data.param.searchPhoto.SearchPhotoParam
 import com.alireza.picture.data.remote.api.PictureApiService
 import com.alireza.picture.data.repository.searchPhoto.SearchPhotoRepositoryImpl
 import com.alireza.picture.domain.model.searchPhoto.SearchPhotoMapper

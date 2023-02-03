@@ -5,7 +5,7 @@ import com.alireza.core.data.repository.ErrorModel
 import com.alireza.core.data.repository.Success
 import com.alireza.picture.data.local.dao.searchHistory.SearchHistoryDao
 import com.alireza.picture.data.local.entity.searchHistory.SearchHistoryEntity
-import com.alireza.picture.data.param.SearchPhotoParam
+import com.alireza.picture.data.param.searchPhoto.SearchPhotoParam
 import com.alireza.picture.data.remote.api.PictureApiService
 import com.alireza.picture.data.remote.entity.searchPhoto.PhotoResponse
 import com.alireza.picture.domain.repository.searchPhoto.SearchPhotoRepository

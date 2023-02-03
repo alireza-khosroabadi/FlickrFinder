@@ -7,7 +7,7 @@ import com.alireza.picture.data.fakeData.fakeSearchPhotoEntityResponse
 import com.alireza.picture.data.fakeData.fakeSearchPhotoFailed
 import com.alireza.picture.data.local.dao.searchHistory.SearchHistoryDao
 import com.alireza.picture.data.local.entity.searchHistory.SearchHistoryEntity
-import com.alireza.picture.data.param.SearchPhotoParam
+import com.alireza.picture.data.param.searchPhoto.SearchPhotoParam
 import com.alireza.picture.data.remote.api.PictureApiService
 import com.alireza.picture.domain.repository.searchPhoto.SearchPhotoRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -49,7 +49,7 @@ class SearchPhotoRepositoryImplTest{
     @Test
     fun `flow emits failed`() = runTest {
         Mockito.`when`(pictureApiService.searchPhoto(any())).thenAnswer { fakeSearchPhotoFailed }
-        searchPhotoRepository.searchPhoto(SearchPhotoParam("")).collect{dataModel ->
+        searchPhotoRepository.searchPhoto(SearchPhotoParam("")).collect{ dataModel ->
             assertEquals(1, (dataModel as ErrorModel).code)
         }
     }

@@ -12,6 +12,7 @@ import com.alireza.core.presentation.fragment.BaseObserverFragment
 import com.alireza.picture.R
 import com.alireza.picture.databinding.FragmentRecentPhotoBinding
 import com.alireza.picture.domain.model.recentPhoto.RecentPhoto
+import com.alireza.picture.presentation.searchPhoto.SearchPhotoFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -20,6 +21,11 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
 
     private val recentPhotoViewModel: RecentPhotoViewModel by viewModels()
     private val recentPhotoAdapter:RecentPhotoListAdapter by lazy { RecentPhotoListAdapter() }
+
+
+    override fun donOnCreateView() {
+        setupPhotoAdapterListener()
+    }
 
     override fun observe() {
         lifecycleScope.launch {
@@ -79,11 +85,20 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
         emptyStateListener()
         errorStateListener()
         searchClickListener()
+        favoriteClickListener()
     }
 
     private fun searchClickListener() {
         binding.imgSearch.setOnClickListener {
             RecentPhotoFragmentDirections.actionRecentPhotoFragmentToSearchPhotoFragment().also {action ->
+                safeNavigation(action, R.id.recentPhotoFragment )
+            }
+        }
+    }
+
+    private fun favoriteClickListener() {
+        binding.imgFavorite.setOnClickListener {
+            RecentPhotoFragmentDirections.actionRecentPhotoFragmentToFavoritePhotoFragment().also {action ->
                 safeNavigation(action, R.id.recentPhotoFragment )
             }
         }
@@ -97,8 +112,13 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
         }
     }
 
-    override fun donOnCreateView() {
-
+    private fun setupPhotoAdapterListener() {
+        recentPhotoAdapter.onPhotoClick = { photoId,url ->
+            RecentPhotoFragmentDirections.actionRecentPhotoFragmentToPhotoDetailFragment(photoId,url)
+                .also {
+                    safeNavigation(it, R.id.recentPhotoFragment)
+                }
+        }
     }
 
     private fun emptyStateListener() {

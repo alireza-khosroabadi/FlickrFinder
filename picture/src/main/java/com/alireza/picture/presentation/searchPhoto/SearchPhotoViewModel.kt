@@ -5,7 +5,7 @@ import com.alireza.core.domain.model.UseCaseModel
 import com.alireza.core.presentation.viewModel.BaseViewModel
 import com.alireza.core.presentation.viewModel.ErrorState
 import com.alireza.core.presentation.viewModel.ExceptionState
-import com.alireza.picture.data.param.SearchPhotoParam
+import com.alireza.picture.data.param.searchPhoto.SearchPhotoParam
 import com.alireza.picture.domain.model.searchHistory.SearchHistory
 import com.alireza.picture.domain.useCase.searchHistory.ClearSearchHistoryUseCase
 import com.alireza.picture.domain.useCase.searchHistory.RemoveSearchHistoryUseCase

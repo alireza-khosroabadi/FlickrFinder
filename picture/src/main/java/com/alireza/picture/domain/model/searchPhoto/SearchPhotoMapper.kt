@@ -16,6 +16,7 @@ class SearchPhotoMapper : ResponseModelMapper<SearchPhoto, PhotoResponse> {
             isFriend = isFriend>0,
             isFamily = isFamily>0,
             url = urlS?:"https:/live.staticflickr.com/$server/${id}_${secret}_m.jpg",
+            urlLarge = urlL?:"https:/live.staticflickr.com/$server/${id}_${secret}_m.jpg",
             height = heightS?.toInt()?:0,
             width = widthS?.toInt()?:0
         )

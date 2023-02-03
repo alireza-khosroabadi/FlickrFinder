@@ -10,9 +10,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alireza.core.extentions.hideKeyBoard
+import com.alireza.core.extentions.safeNavigation
 import com.alireza.core.presentation.fragment.BaseObserverFragment
 import com.alireza.core.presentation.viewModel.ErrorState
 import com.alireza.core.presentation.viewModel.ExceptionState
+import com.alireza.picture.R
 import com.alireza.picture.databinding.FragmentSearchPhotoBinding
 import com.alireza.picture.domain.model.searchHistory.SearchHistory
 import com.alireza.picture.domain.model.searchPhoto.SearchPhoto
@@ -35,7 +37,9 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
         searchHistoryAdapterListener()
         setupOnBackClickListener()
         setupOnClearAllHistoryClickListener()
+        setupPhotoAdapterListener()
     }
+
 
     override fun observe() {
         observeSearchHistory()
@@ -178,6 +182,15 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
     private fun setupOnClearAllHistoryClickListener() {
         binding.tvClearHistory.setOnClickListener {
             mViewModel.clearAllHistory()
+        }
+    }
+
+    private fun setupPhotoAdapterListener() {
+        searchPhotoAdapter.onPhotoClick = { photoId,url ->
+            SearchPhotoFragmentDirections.actionSearchPhotoFragmentToPhotoDetailFragment(photoId,url)
+                .also {
+                    safeNavigation(it, R.id.searchPhotoFragment)
+                }
         }
     }
 
