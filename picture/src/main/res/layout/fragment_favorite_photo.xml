@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.alireza.core.view.view.emptyState.EmptyStateView
+    <com.alireza.core.view.emptyState.EmptyStateView
         android:id="@+id/empty_state"
         android:layout_width="match_parent"
         android:layout_height="0dp"
