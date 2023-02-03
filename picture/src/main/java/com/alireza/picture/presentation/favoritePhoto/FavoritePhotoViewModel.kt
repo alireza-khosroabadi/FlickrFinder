@@ -33,7 +33,7 @@ class FavoritePhotoViewModel @Inject constructor(private val favoritePhotoListUs
                     when (useCaseModel) {
                         is UseCaseModel.Success -> FavoritePhotoList(useCaseModel.data)
                         is UseCaseModel.Error -> Error(useCaseModel.code, useCaseModel.message)
-                        is UseCaseModel.Exception -> Exception(useCaseModel.exception)
+                        is UseCaseModel.Exception -> Exception(useCaseModel.error)
                     }
                 }
                 .stateIn(

@@ -29,7 +29,7 @@ class RecentPhotoViewModel @Inject constructor(private val getRecentPhoto: Recen
                     when (useCaseModel) {
                         is UseCaseModel.Success -> RecentPhotoList(useCaseModel.data)
                         is UseCaseModel.Error -> Error(useCaseModel.code, useCaseModel.message)
-                        is UseCaseModel.Exception -> Exception(useCaseModel.exception)
+                        is UseCaseModel.Exception -> Exception(useCaseModel.error)
                     }
                 }
                 .stateIn(
