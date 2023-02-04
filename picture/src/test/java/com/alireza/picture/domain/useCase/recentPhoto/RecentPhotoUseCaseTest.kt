@@ -84,7 +84,7 @@ private val recentPhotoUseCase: RecentPhotoUseCase by lazy {
         }
 
         recentPhotoUseCase.invoke(ShouldFetchParam()).collect { useCaseModel ->
-            assertEquals(AppError.SocketTimeOut::class, (useCaseModel as UseCaseModel.Exception).error)
+            assertEquals(AppError.SocketTimeOut::class, (useCaseModel as UseCaseModel.Exception).error::class)
         }
     }
 
