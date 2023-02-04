@@ -12,28 +12,26 @@ import java.net.UnknownHostException
  * for this code its only support a few types of exceptions.
  * */
 
-enum class AppError(@DrawableRes val icon: Int, @StringRes val title: Int) {
-    INTERNET_CONNECTION(
-        icon = R.drawable.ic_no_internet, title = R.string.core_no_internet
-    ),
-    SOCKET_TIME_OUT(
-        icon = R.drawable.ic_server_unrichable, title = R.string.core_socket_timeout
-    ),
-    UNKNOWN_ERROR(
-        icon = R.drawable.ic_error, title = R.string.core_unknown_exception
-    ),
+sealed class AppError(@DrawableRes val icon: Int, @StringRes val title: Int) {
+    class NetworkConnection :
+        AppError(icon = R.drawable.ic_no_internet, title = R.string.core_no_internet)
 
-    UNKNOWN_HOST_EXCEPTION(
-        icon = R.drawable.ic_server_unrichable, title = R.string.core_unknown_exception
-    ),
+    class SocketTimeOut :
+        AppError(icon = R.drawable.ic_server_unrichable, title = R.string.core_socket_timeout)
+
+    class UnknownError :
+        AppError(icon = R.drawable.ic_error, title = R.string.core_unknown_exception)
+
+    class UnknownHostException :
+        AppError(icon = R.drawable.ic_server_unrichable, title = R.string.core_unknown_exception)
 }
 
 
-fun Throwable.getAppError():AppError{
-    return when(this){
-        is InternetConnectionException -> AppError.INTERNET_CONNECTION
-        is SocketTimeoutException -> AppError.SOCKET_TIME_OUT
-        is UnknownHostException -> AppError.UNKNOWN_HOST_EXCEPTION
-        else -> AppError.UNKNOWN_ERROR
+fun Throwable.getAppError(): AppError {
+    return when (this) {
+        is InternetConnectionException -> AppError.NetworkConnection()
+        is SocketTimeoutException -> AppError.SocketTimeOut()
+        is UnknownHostException -> AppError.UnknownHostException()
+        else -> AppError.UnknownError()
     }
 }

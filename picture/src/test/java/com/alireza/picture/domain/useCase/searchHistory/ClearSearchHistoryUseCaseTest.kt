@@ -27,8 +27,7 @@ class ClearSearchHistoryUseCaseTest {
     }
 
 
-    @Rule
-    @JvmField
+    @get:Rule
     val rule = InstantTaskExecutorRule()
 
 

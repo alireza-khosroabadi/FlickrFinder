@@ -5,8 +5,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.alireza.core.extentions.safeNavigation
 import com.alireza.core.presentation.fragment.BaseObserverFragment
 import com.alireza.picture.R
@@ -27,6 +27,7 @@ class FavoritePhotoFragment : BaseObserverFragment<FragmentFavoritePhotoBinding>
     override fun donOnCreateView() {
         emptyStateListener()
         favoriteListAdapterListener()
+        setupOnBackClickListener()
     }
 
     override fun setupViews() {
@@ -84,4 +85,9 @@ class FavoritePhotoFragment : BaseObserverFragment<FragmentFavoritePhotoBinding>
             mViewModel.loadFavoritePhoto()
         }
     }
+
+    private fun setupOnBackClickListener() {
+        binding.iconBack.setOnClickListener { findNavController().navigateUp() }
+    }
+
 }

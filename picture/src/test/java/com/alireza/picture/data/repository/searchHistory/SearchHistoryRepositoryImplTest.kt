@@ -31,8 +31,7 @@ class SearchHistoryRepositoryImplTest {
     }
 
 
-    @Rule
-    @JvmField
+    @get:Rule
     val rule = InstantTaskExecutorRule()
 
 
