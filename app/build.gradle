@@ -32,7 +32,7 @@ android {
         versionCode generateVersionCode()
         versionName generateVersionName()
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.alireza.flickrfinder.config.HiltTestRunner"
     }
 
     buildTypes {
