@@ -10,203 +10,225 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/icon_back"
-        android:layout_width="@dimen/icon_size_32dp"
-        android:layout_height="@dimen/icon_size_32dp"
-        android:src="@drawable/ic_arrow_right"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_owner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-        app:layout_constraintBottom_toBottomOf="@id/icon_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/icon_back" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_photo"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/fix_size_0dp"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="h,16:9"
-        app:layout_constraintTop_toBottomOf="@id/icon_back" />
-
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/view_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_16dp"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@id/comment_container"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_photo">
-
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/icon_size_24dp"
-            android:layout_height="@dimen/icon_size_24dp"
-            android:src="@drawable/ic_view" />
+            android:id="@+id/icon_back"
+            android:layout_width="@dimen/icon_size_32dp"
+            android:layout_height="@dimen/icon_size_32dp"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_view_count"
+            android:id="@+id/tv_owner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_4dp"
-            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/comment_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@id/is_favorite"
-        app:layout_constraintStart_toEndOf="@id/view_container"
-        app:layout_constraintTop_toBottomOf="@id/img_photo">
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            app:layout_constraintBottom_toBottomOf="@id/icon_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/icon_back" />
 
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/icon_size_24dp"
-            android:layout_height="@dimen/icon_size_24dp"
-            android:src="@drawable/ic_comment" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detail_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fix_size_0dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_back">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_comment_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_4dp"
-            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/is_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:layout_marginEnd="@dimen/margin_16dp"
-        android:clickable="false"
-        android:drawableStart="@drawable/ic_view"
-        android:src="@drawable/ic_no_favorite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/comment_container"
-        app:layout_constraintTop_toBottomOf="@id/img_photo" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_photo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fix_size_0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="h,16:9"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-    <View
-        android:id="@+id/separator"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/boarder_1dp"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:background="@color/boarder"
-        app:layout_constraintTop_toBottomOf="@id/view_container" />
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/view_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@id/comment_container"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_photo">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/icon_size_24dp"
+                    android:layout_height="@dimen/icon_size_24dp"
+                    android:src="@drawable/ic_view" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_view_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4dp"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/comment_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@id/is_favorite"
+                app:layout_constraintStart_toEndOf="@id/view_container"
+                app:layout_constraintTop_toBottomOf="@id/img_photo">
 
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_img_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:text="@string/fragmentPhotoDetail_photo_title"
-        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/separator" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/icon_size_24dp"
+                    android:layout_height="@dimen/icon_size_24dp"
+                    android:src="@drawable/ic_comment" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="viewEnd"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-        app:layout_constraintBottom_toBottomOf="@id/tv_img_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_img_title"
-        app:layout_constraintTop_toTopOf="@id/tv_img_title" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_comment_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4dp"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_date_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fragmentPhotoDetail_photo_date"
-        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-        app:layout_constraintBottom_toBottomOf="@id/tv_date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_date" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:textAlignment="viewEnd"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_date_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/is_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:clickable="false"
+                android:drawableStart="@drawable/ic_view"
+                android:src="@drawable/ic_no_favorite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/comment_container"
+                app:layout_constraintTop_toBottomOf="@id/img_photo" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_location_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fragmentPhotoDetail_photo_location"
-        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-        app:layout_constraintBottom_toBottomOf="@id/tv_location"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_location" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_location"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:textAlignment="viewEnd"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_location_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_date" />
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/boarder_1dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:background="@color/boarder"
+                app:layout_constraintTop_toBottomOf="@id/view_container" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_description_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fragmentPhotoDetail_photo_description"
-        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-        app:layout_constraintBottom_toBottomOf="@id/tv_description"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_description" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16dp"
-        android:textAlignment="viewEnd"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_description_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_location" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_img_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:text="@string/fragmentPhotoDetail_photo_title"
+                android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator" />
 
-    <ProgressBar
-        android:id="@+id/progress_loading"
-        android:layout_width="@dimen/fix_size_50dp"
-        android:layout_height="@dimen/fix_size_50dp"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                app:layout_constraintBottom_toBottomOf="@id/tv_img_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_img_title"
+                app:layout_constraintTop_toTopOf="@id/tv_img_title" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fragmentPhotoDetail_photo_date"
+                android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                app:layout_constraintBottom_toBottomOf="@id/tv_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_date" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_date_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_location_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fragmentPhotoDetail_photo_location"
+                android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                app:layout_constraintBottom_toBottomOf="@id/tv_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_location" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_location_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_date" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_description_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:text="@string/fragmentPhotoDetail_photo_description"
+                android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_location" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_description_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_location" />
+
+            <ProgressBar
+                android:id="@+id/progress_loading"
+                android:layout_width="@dimen/fix_size_50dp"
+                android:layout_height="@dimen/fix_size_50dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.alireza.core.view.emptyState.EmptyStateView
+            android:id="@+id/error_state"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fix_size_0dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:visibility="gone"
+            app:buttonText="@string/empty_state_view_btn_back"
+            app:img="@drawable/ic_error"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_back" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
