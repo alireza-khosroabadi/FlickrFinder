@@ -36,7 +36,6 @@ fun Fragment.safeNavigation(
 }
 
 fun Fragment.hideKeyBoard() {
-    //val imm: InputMethodManager =
     (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).run {
         view?.let { notNullView ->
             hideSoftInputFromWindow(notNullView.windowToken, 0)

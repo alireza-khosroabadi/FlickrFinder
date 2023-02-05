@@ -32,10 +32,6 @@ class PhotoDetailFragment : BaseObserverFragment<FragmentPhotoDetailBinding>() {
     override fun getViewBinding(): FragmentPhotoDetailBinding =
         FragmentPhotoDetailBinding.inflate(layoutInflater)
 
-    override fun setupViews() {
-
-    }
-
     override fun observe() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
@@ -123,5 +119,9 @@ class PhotoDetailFragment : BaseObserverFragment<FragmentPhotoDetailBinding>() {
         binding.errorState.setOnButtonClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    override fun setupViews() {
+        /*NO OP*/
     }
 }

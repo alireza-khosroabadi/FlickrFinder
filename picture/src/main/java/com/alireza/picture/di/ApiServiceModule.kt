@@ -1,6 +1,5 @@
 package com.alireza.picture.di
 
-import androidx.annotation.VisibleForTesting
 import com.alireza.picture.data.remote.api.PictureApiService
 import dagger.Module
 import dagger.Provides
