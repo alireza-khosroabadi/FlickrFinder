@@ -1,5 +1,6 @@
 package com.alireza.picture.di
 
+import androidx.annotation.VisibleForTesting
 import com.alireza.picture.data.remote.api.PictureApiService
 import dagger.Module
 import dagger.Provides
@@ -10,7 +11,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object NetworkModule {
+object ApiServiceModule{
 
     @Singleton
     @Provides
