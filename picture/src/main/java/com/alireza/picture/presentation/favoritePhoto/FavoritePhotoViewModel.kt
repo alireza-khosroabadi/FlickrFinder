@@ -6,8 +6,6 @@ import com.alireza.core.presentation.viewModel.BaseViewModel
 import com.alireza.core.presentation.viewModel.ErrorState
 import com.alireza.core.presentation.viewModel.ExceptionState
 import com.alireza.picture.domain.useCase.favoritePhoto.FavoritePhotoListUseCase
-import com.alireza.picture.presentation.recentPhoto.Error
-import com.alireza.picture.presentation.recentPhoto.Exception
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -32,8 +30,8 @@ class FavoritePhotoViewModel @Inject constructor(private val favoritePhotoListUs
                 .map { useCaseModel ->
                     when (useCaseModel) {
                         is UseCaseModel.Success -> FavoritePhotoList(useCaseModel.data)
-                        is UseCaseModel.Error -> Error(useCaseModel.code, useCaseModel.message)
-                        is UseCaseModel.Exception -> Exception(useCaseModel.error)
+                        is UseCaseModel.Error -> ErrorState(useCaseModel.code, useCaseModel.message)
+                        is UseCaseModel.Exception -> ExceptionState(useCaseModel.error)
                     }
                 }
                 .stateIn(

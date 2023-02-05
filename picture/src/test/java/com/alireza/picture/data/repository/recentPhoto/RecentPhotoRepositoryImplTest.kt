@@ -1,13 +1,17 @@
 package com.alireza.picture.data.repository.recentPhoto
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.alireza.core.data.error.InternetConnectionException
 import com.alireza.core.data.repository.ErrorModel
 import com.alireza.core.data.repository.Success
+import com.alireza.core.tools.NetworkConnectivity
 import com.alireza.picture.data.fakeData.fakeRecentPhotoEntityListFlow
 import com.alireza.picture.data.fakeData.fakeRecentPhotoEntityResponse
 import com.alireza.picture.data.fakeData.fakeRecentPhotoFailedFlow
 import com.alireza.picture.data.local.dao.recentPhoto.RecentPhotoDao
+import com.alireza.picture.data.local.dao.updateTable.UpdateTableDao
 import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntityMapper
+import com.alireza.picture.data.param.shouldFetch.ShouldFetchParam
 import com.alireza.picture.data.remote.api.PictureApiService
 import com.alireza.picture.domain.repository.recentPhoto.RecentPhotoRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,34 +35,45 @@ class RecentPhotoRepositoryImplTest {
         on{recentPhotos()} doReturn fakeRecentPhotoEntityListFlow
     }
     private val photoApiService = mock<PictureApiService>()
+    private val updateTableDao = mock<UpdateTableDao>()
+    private val networkConnectivity = mock<NetworkConnectivity>()
     private val recentPhotoRepository: RecentPhotoRepository by lazy {
         RecentPhotoRepositoryImpl(
+            networkConnectivity,
             photoApiService,
             recentPhotoDao,
+            updateTableDao,
             recentPhotoMapper
         )
     }
 
-    @Rule
-    @JvmField
+    @get:Rule
     val rule = InstantTaskExecutorRule()
 
 
     @Test
-    fun flow_emits_successfully() = runTest {
+    fun `flow emits successfully`() = runTest {
+        `when`(networkConnectivity.isInternetOn()).thenReturn(true)
         `when`(photoApiService.recentPhoto()).thenAnswer { fakeRecentPhotoEntityResponse }
-        recentPhotoRepository.recentPhoto().collect{dataModel ->
+        recentPhotoRepository.recentPhoto(ShouldFetchParam()).collect{ dataModel ->
             assertEquals(1, (dataModel as Success).data.size)
         }
     }
 
     @Test
-    fun flow_emits_failed() = runTest {
+    fun `flow emits failed`() = runTest {
+        `when`(networkConnectivity.isInternetOn()).thenReturn(true)
         `when`(photoApiService.recentPhoto()).thenAnswer { fakeRecentPhotoFailedFlow }
-        recentPhotoRepository.recentPhoto().collect{dataModel ->
+        recentPhotoRepository.recentPhoto(ShouldFetchParam()).collect{dataModel ->
             assertEquals(1, (dataModel as ErrorModel).code)
         }
     }
 
+    @Test
+    fun `throw internet connection exception`() = runTest {
+        `when`(networkConnectivity.isInternetOn()).thenReturn(false)
+        assertThrows(InternetConnectionException::class.java
+        ) { recentPhotoRepository.recentPhoto(ShouldFetchParam()) }
+    }
 
 }

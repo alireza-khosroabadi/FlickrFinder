@@ -5,8 +5,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.alireza.core.extentions.safeNavigation
 import com.alireza.core.presentation.fragment.BaseObserverFragment
 import com.alireza.picture.R
@@ -26,7 +26,9 @@ class FavoritePhotoFragment : BaseObserverFragment<FragmentFavoritePhotoBinding>
 
     override fun donOnCreateView() {
         emptyStateListener()
-        favoriteListAdapterListener()
+        favoriteListAdapterClickListener()
+        favoriteListAdapterLongClickListener()
+        setupOnBackClickListener()
     }
 
     override fun setupViews() {
@@ -68,11 +70,21 @@ class FavoritePhotoFragment : BaseObserverFragment<FragmentFavoritePhotoBinding>
         binding.emptyState.isVisible = false
     }
 
-    private fun favoriteListAdapterListener() {
+    private fun favoriteListAdapterClickListener() {
         favoritePhotoListAdapter.onPhotoClick = { photoId, photoUrl ->
             FavoritePhotoFragmentDirections.actionFavoritePhotoFragmentToPhotoDetailFragment(
                 photoId,
                 photoUrl
+            ).also { action ->
+                safeNavigation(action, R.id.favoritePhotoFragment)
+            }
+        }
+    }
+
+    private fun favoriteListAdapterLongClickListener() {
+        favoritePhotoListAdapter.onPhotoLongClick = { photoId ->
+            FavoritePhotoFragmentDirections.actionFavoritePhotoFragmentToRemoveFavoritePhotoBottomSheet(
+                photoId
             ).also { action ->
                 safeNavigation(action, R.id.favoritePhotoFragment)
             }
@@ -84,4 +96,9 @@ class FavoritePhotoFragment : BaseObserverFragment<FragmentFavoritePhotoBinding>
             mViewModel.loadFavoritePhoto()
         }
     }
+
+    private fun setupOnBackClickListener() {
+        binding.iconBack.setOnClickListener { findNavController().navigateUp() }
+    }
+
 }

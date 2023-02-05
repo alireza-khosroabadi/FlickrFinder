@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.alireza.core.data.error.AppError
 import com.alireza.core.extentions.safeNavigation
 import com.alireza.core.presentation.fragment.BaseObserverFragment
+import com.alireza.core.presentation.viewModel.ErrorState
+import com.alireza.core.presentation.viewModel.ExceptionState
 import com.alireza.picture.R
 import com.alireza.picture.databinding.FragmentRecentPhotoBinding
 import com.alireza.picture.domain.model.recentPhoto.RecentPhoto
@@ -29,14 +31,26 @@ class RecentPhotoFragment : BaseObserverFragment<FragmentRecentPhotoBinding>() {
     override fun observe() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                recentPhotoViewModel.recentPhotoState.collect { data ->
-                    when (data) {
-                        is Error -> showError(data.message)
-                        is Exception -> showError(data.error)
-                        Loading -> showLoading(true)
-                        is RecentPhotoList -> showRecentPhoto(data.photoList)
-                    }
-                }
+                launch { observeRecentPhotoState() }
+                launch { observeErrorState() }
+            }
+        }
+    }
+
+    private suspend fun observeRecentPhotoState() {
+        recentPhotoViewModel.recentPhotoState.collect { data ->
+            when (data) {
+                Loading -> showLoading(true)
+                is RecentPhotoList -> showRecentPhoto(data.photoList)
+            }
+        }
+    }
+
+    private suspend fun observeErrorState() {
+        recentPhotoViewModel.errorState.collect { error ->
+            when (error) {
+                is ErrorState -> showError(error.message)
+                is ExceptionState -> showError(error.error)
             }
         }
     }

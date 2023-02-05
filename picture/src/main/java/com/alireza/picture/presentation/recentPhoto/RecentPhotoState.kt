@@ -7,5 +7,3 @@ sealed class RecentPhotoState
 
 object Loading : RecentPhotoState()
 data class RecentPhotoList(val photoList: List<RecentPhoto>) : RecentPhotoState()
-data class Error(val code:Int , val message: String) : RecentPhotoState()
-data class Exception(val error: AppError) : RecentPhotoState()

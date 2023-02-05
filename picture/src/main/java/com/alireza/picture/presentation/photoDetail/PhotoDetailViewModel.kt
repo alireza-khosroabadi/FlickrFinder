@@ -39,25 +39,25 @@ class PhotoDetailViewModel @Inject constructor(
         loadPhotoDetail()
     }
 
-    private fun loadPhotoDetail() {
+    fun loadPhotoDetail() {
         viewModelScope.launch {
             combine(
                 photoDetailUseCase.invoke(PhotoDetailParam(photoId)),
                 favoritePhotoIdListUseCase(Unit)
             ) { photoDetail, favoritePhotoIds ->
-                if (photoDetail is UseCaseModel.Error)
-                    ErrorState(photoDetail.code, photoDetail.message)
-                if (photoDetail is UseCaseModel.Exception)
-                    ExceptionState(photoDetail.error)
-                else {
-                    PhotoState((photoDetail as UseCaseModel.Success).data.apply {
-                        url = imageUrl
-                        isFavorite =
-                            (favoritePhotoIds as UseCaseModel.Success)
-                                .data.any { favoritePhoto -> favoritePhoto.id == id }
-                        this@PhotoDetailViewModel.photoDetail = this
-                        this@PhotoDetailViewModel.isFavoritePhoto = isFavorite
-                    })
+                when (photoDetail) {
+                    is UseCaseModel.Error -> ErrorState(photoDetail.code, photoDetail.message)
+                    is UseCaseModel.Exception -> ExceptionState(photoDetail.error)
+                    else -> {
+                        PhotoState((photoDetail as UseCaseModel.Success).data.apply {
+                            url = imageUrl
+                            isFavorite =
+                                (favoritePhotoIds as UseCaseModel.Success)
+                                    .data.any { favoritePhoto -> favoritePhoto.id == id }
+                            this@PhotoDetailViewModel.photoDetail = this
+                            this@PhotoDetailViewModel.isFavoritePhoto = isFavorite
+                        })
+                    }
                 }
             }
                 .flowOn(Dispatchers.IO)

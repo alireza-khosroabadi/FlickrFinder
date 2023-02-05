@@ -86,22 +86,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.alireza.core.view.view.emptyState.EmptyStateView
+    <com.alireza.core.view.emptyState.EmptyStateView
         android:id="@+id/empty_state"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/fix_size_0dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/search_view_container" />
 
-    <com.alireza.core.view.view.emptyState.EmptyStateView
+    <com.alireza.core.view.emptyState.EmptyStateView
         android:id="@+id/error_state"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/fix_size_0dp"
         android:visibility="gone"
         app:img="@drawable/ic_error"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/search_view_container" />
 
 
     <androidx.constraintlayout.widget.Group

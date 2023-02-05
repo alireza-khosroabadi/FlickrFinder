@@ -7,7 +7,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alireza.core.data.error.AppError
 import com.alireza.core.extentions.hideKeyBoard
@@ -39,13 +38,50 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
         setupOnBackClickListener()
         setupOnClearAllHistoryClickListener()
         setupPhotoAdapterListener()
+        emptyStateListener()
+        errorStateListener()
     }
 
 
     override fun observe() {
-        observeSearchHistory()
-        observeErrorState()
-        observeSearchPhoto()
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                launch { observeSearchHistory() }
+                launch { observeSearchPhoto() }
+                launch { observeErrorState() }
+            }
+        }
+    }
+
+    private suspend fun observeErrorState() {
+        mViewModel.errorState.collect { error ->
+            when (error) {
+                is ErrorState -> showError(error.message)
+                is ExceptionState -> showError(error.error)
+            }
+        }
+    }
+
+    private suspend fun observeSearchPhoto() {
+        mViewModel.searchPhotoState.collect { state ->
+            when (state) {
+                is SearchPhotoList -> showPhotoList(state.photoList)
+                SearchPhotoLoading -> {
+                    if (firstInit.not())
+                        showLoading(true)
+                    firstInit = false
+                }
+            }
+        }
+    }
+
+    private suspend fun observeSearchHistory() {
+        mViewModel.searchHistoryState.collect { state ->
+            when (state) {
+                Loading -> Unit
+                is SearchHistoryList -> showHistory(state.lastHistory)
+            }
+        }
     }
 
 
@@ -80,50 +116,6 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = searchPhotoAdapter
-        }
-    }
-
-    private fun observeSearchHistory() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
-                mViewModel.searchHistoryState.collect { state ->
-                    when (state) {
-                        Loading -> Unit
-                        is SearchHistoryList -> showHistory(state.lastHistory)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun observeSearchPhoto() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
-                mViewModel.searchPhotoState.collect { state ->
-                    when (state) {
-                        is SearchPhotoList -> showPhotoList(state.photoList)
-                        SearchPhotoLoading -> {
-                            if (firstInit.not())
-                                showLoading(true)
-                            firstInit = false
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-
-    private fun observeErrorState() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
-                mViewModel.errorState.collect { error ->
-                    when (error) {
-                        is ErrorState -> showError(error.message)
-                        is ExceptionState -> showError(error.error)
-                    }
-                }
-            }
         }
     }
 
@@ -201,6 +193,7 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
 
     private fun showError(data: AppError) {
         showLoading(false)
+        binding.historyGroup.isVisible = false
         binding.emptyState.isVisible = false
         binding.errorState.isVisible = true
         binding.errorState.setAppError(data)
@@ -208,8 +201,21 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
 
     private fun showError(message: String) {
         showLoading(false)
+        binding.historyGroup.isVisible = false
         binding.emptyState.isVisible = false
         binding.errorState.isVisible = true
         binding.errorState.setCaption(message)
+    }
+
+    private fun emptyStateListener() {
+        binding.emptyState.setOnButtonClickListener {
+            searchPhoto()
+        }
+    }
+
+    private fun errorStateListener() {
+        binding.errorState.setOnButtonClickListener {
+            searchPhoto()
+        }
     }
 }
