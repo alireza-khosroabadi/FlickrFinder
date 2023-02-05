@@ -54,7 +54,21 @@
         <action
             android:id="@+id/action_favoritePhotoFragment_to_photoDetailFragment"
             app:destination="@id/photoDetailFragment" />
+        <action
+            android:id="@+id/action_favoritePhotoFragment_to_removeFavoritePhotoBottomSheet"
+            app:destination="@id/removeFavoritePhotoBottomSheet" />
     </fragment>
+
+    <dialog
+        android:id="@+id/removeFavoritePhotoBottomSheet"
+        tools:layout="@layout/bottom_sheet_remove_favorite_photo"
+        android:name="com.alireza.picture.presentation.favoritePhoto.remove.RemoveFavoritePhotoBottomSheet"
+        android:label="RemoveFavoritePhotoBottomSheet">
+        <argument
+            android:name="photoId"
+            app:argType="string"
+            app:nullable="false" />
+    </dialog>
 
 
 </navigation>

@@ -26,7 +26,8 @@ class FavoritePhotoFragment : BaseObserverFragment<FragmentFavoritePhotoBinding>
 
     override fun donOnCreateView() {
         emptyStateListener()
-        favoriteListAdapterListener()
+        favoriteListAdapterClickListener()
+        favoriteListAdapterLongClickListener()
         setupOnBackClickListener()
     }
 
@@ -69,11 +70,21 @@ class FavoritePhotoFragment : BaseObserverFragment<FragmentFavoritePhotoBinding>
         binding.emptyState.isVisible = false
     }
 
-    private fun favoriteListAdapterListener() {
+    private fun favoriteListAdapterClickListener() {
         favoritePhotoListAdapter.onPhotoClick = { photoId, photoUrl ->
             FavoritePhotoFragmentDirections.actionFavoritePhotoFragmentToPhotoDetailFragment(
                 photoId,
                 photoUrl
+            ).also { action ->
+                safeNavigation(action, R.id.favoritePhotoFragment)
+            }
+        }
+    }
+
+    private fun favoriteListAdapterLongClickListener() {
+        favoritePhotoListAdapter.onPhotoLongClick = { photoId ->
+            FavoritePhotoFragmentDirections.actionFavoritePhotoFragmentToRemoveFavoritePhotoBottomSheet(
+                photoId
             ).also { action ->
                 safeNavigation(action, R.id.favoritePhotoFragment)
             }
