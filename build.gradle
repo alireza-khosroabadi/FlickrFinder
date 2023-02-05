@@ -32,7 +32,7 @@ buildscript {
         def espresso_contrib_version = "3.5.1"
         def nav_version = "2.5.3"
         def core_testing = "2.1.0"
-        def swipere_fresh_layout_version = "1.1.0"
+        def swiper_fresh_layout_version = "1.1.0"
         def rxBinding_version = '4.0.0'
         def fragment_test_version = "1.5.5"
         def hamcrest_version = "2.2"
@@ -71,7 +71,7 @@ buildscript {
                 "androidx.databinding:library:$databinding_version",
                 "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core_version",
                 "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version",
-                "androidx.swiperefreshlayout:swiperefreshlayout:$swipere_fresh_layout_version",
+                "androidx.swiperefreshlayout:swiperefreshlayout:$swiper_fresh_layout_version",
                 "androidx.room:room-ktx:$room_version",
                 "androidx.room:room-runtime:$room_version",
                 "androidx.navigation:navigation-fragment-ktx:$nav_version",
