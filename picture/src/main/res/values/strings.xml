@@ -21,4 +21,7 @@
 
     <!-- FragmentFavoritePhoto -->
     <string name="fragmentFavoritePhoto_title">Favorite Photos</string>
+    <string name="BottomSheetRemoveFavoritePhoto_remove_photo_question">Do you want to remove this photo?</string>
+    <string name="BottomSheetRemoveFavoritePhoto_button_yes">Yes</string>
+    <string name="BottomSheetRemoveFavoritePhoto_button_no">No</string>
 </resources>

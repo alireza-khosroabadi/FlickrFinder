@@ -12,6 +12,7 @@ class FavoritePhotoListAdapter : RecyclerView.Adapter<FavoritePhotoListAdapter.V
     private var favoritePhotoList = listOf<PhotoDetail>()
     private var inflater: LayoutInflater? = null
     var onPhotoClick: ((photoId: String, photoUrl: String) -> Unit)? = null
+    var onPhotoLongClick: ((photoId: String) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         if (inflater == null)
@@ -37,6 +38,18 @@ class FavoritePhotoListAdapter : RecyclerView.Adapter<FavoritePhotoListAdapter.V
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: PhotoDetail) {
             binding.imgPhoto.loadImage(item.url, 400, 400)
+            setOnPhotoClickListener(item)
+            setOnPhotoLongClickListener(item)
+        }
+
+        private fun setOnPhotoLongClickListener(item: PhotoDetail) {
+            binding.imgPhoto.setOnLongClickListener {
+                onPhotoLongClick?.invoke(item.id)
+                true
+            }
+        }
+
+        private fun setOnPhotoClickListener(item: PhotoDetail) {
             binding.imgPhoto.setOnClickListener {
                 onPhotoClick?.invoke(item.id, item.url)
             }
