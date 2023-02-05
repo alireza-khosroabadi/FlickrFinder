@@ -193,18 +193,22 @@ class SearchPhotoFragment : BaseObserverFragment<FragmentSearchPhotoBinding>() {
 
     private fun showError(data: AppError) {
         showLoading(false)
-        binding.historyGroup.isVisible = false
-        binding.emptyState.isVisible = false
-        binding.errorState.isVisible = true
+        updateViewForErrorHandling()
         binding.errorState.setAppError(data)
     }
 
     private fun showError(message: String) {
         showLoading(false)
-        binding.historyGroup.isVisible = false
-        binding.emptyState.isVisible = false
-        binding.errorState.isVisible = true
+        updateViewForErrorHandling()
         binding.errorState.setCaption(message)
+    }
+
+    private fun updateViewForErrorHandling() {
+        with(binding){
+            historyGroup.isVisible = false
+            emptyState.isVisible = false
+            errorState.isVisible = true
+        }
     }
 
     private fun emptyStateListener() {

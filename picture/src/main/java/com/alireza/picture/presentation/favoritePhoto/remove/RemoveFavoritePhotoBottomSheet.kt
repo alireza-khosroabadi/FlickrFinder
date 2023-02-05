@@ -14,10 +14,6 @@ class RemoveFavoritePhotoBottomSheet :
     override fun getViewBinding(): BottomSheetRemoveFavoritePhotoBinding =
         BottomSheetRemoveFavoritePhotoBinding.inflate(layoutInflater)
 
-    override fun donOnCreateView() {
-
-    }
-
     override fun setupViews() {
         binding.btnYes.setOnClickListener {
             mViewModel.removePhoto()
@@ -31,8 +27,12 @@ class RemoveFavoritePhotoBottomSheet :
 
     }
 
-    override fun observe() {
+    override fun donOnCreateView() {
+        /*NO OP*/
+    }
 
+    override fun observe() {
+        /*NO OP*/
     }
 
 }

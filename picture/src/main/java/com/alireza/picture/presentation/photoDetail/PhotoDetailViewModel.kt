@@ -39,12 +39,13 @@ class PhotoDetailViewModel @Inject constructor(
         loadPhotoDetail()
     }
 
-    fun loadPhotoDetail() {
+    private fun loadPhotoDetail() {
         viewModelScope.launch {
             combine(
                 photoDetailUseCase.invoke(PhotoDetailParam(photoId)),
                 favoritePhotoIdListUseCase(Unit)
             ) { photoDetail, favoritePhotoIds ->
+                // Combine two flow to detect photo is favorite or not
                 when (photoDetail) {
                     is UseCaseModel.Error -> ErrorState(photoDetail.code, photoDetail.message)
                     is UseCaseModel.Exception -> ExceptionState(photoDetail.error)
