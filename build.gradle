@@ -47,6 +47,9 @@ buildscript {
         def activity_ktx_version = "1.6.1"
         def mockito_kotlin_version = "4.1.0"
         def mockito_inline= "2.8.47"
+        def compose_version = '1.3.3'
+        def activity_compose_version = '1.6.1'
+        def material_3_version = "1.0.0-alpha11"
 
         apiLibraries = [
                 "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
@@ -77,6 +80,13 @@ buildscript {
                 "androidx.navigation:navigation-fragment-ktx:$nav_version",
                 "androidx.navigation:navigation-ui-ktx:$nav_version",
                 "androidx.test.espresso:espresso-contrib:$espresso_contrib_version"
+        ]
+
+        composeUiLibraries = [
+                "androidx.activity:activity-compose:$activity_compose_version",
+                "androidx.compose.ui:ui:$compose_version",
+                "androidx.compose.ui:ui-tooling-preview:$compose_version",
+                "androidx.compose.material3:material3:$material_3_version"
         ]
 
         kaptLibraries = [
@@ -116,7 +126,8 @@ buildscript {
                 "com.google.dagger:hilt-android-testing:$hilt_version",
                 "androidx.navigation:navigation-testing:$nav_version",
                 "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version",
-                "org.mockito:mockito-inline:$mockito_inline"
+                "org.mockito:mockito-inline:$mockito_inline",
+                "androidx.compose.ui:ui-test-junit4:$compose_version"
         ]
 
         androidKaptTestLibraries =[
@@ -128,7 +139,9 @@ buildscript {
                 "androidx.test:runner:$test_runner_version",
                 "androidx.test:rules:$android_test_version",
                 "androidx.fragment:fragment-ktx:$fragment_ktx_version",
-                "androidx.fragment:fragment-testing:$fragment_test_version"
+                "androidx.fragment:fragment-testing:$fragment_test_version",
+                "androidx.compose.ui:ui-tooling:$compose_version",
+                "androidx.compose.ui:ui-test-manifest:$compose_version"
         ]
     }
 
