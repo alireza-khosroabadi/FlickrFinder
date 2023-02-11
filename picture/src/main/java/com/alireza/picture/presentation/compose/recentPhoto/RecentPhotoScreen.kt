@@ -6,9 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -19,7 +21,7 @@ import com.alireza.ui.progressBar.FlickrFinderCircularProgressBar
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun RecentPhotoScreen(
-    viewModel: RecentPhotoViewModel,
+    viewModel: RecentPhotoViewModel = hiltViewModel(),
     onNavigateToSearch: () -> Unit,
     onNavigateFavorite: () -> Unit
 ) {
@@ -61,10 +63,10 @@ private fun TopLayout(
             modifier = modifier.weight(1f)
         )
 
-        IconButton(onClick = onNavigateFavorite) {
+        IconButton(onClick = onNavigateFavorite, modifier = modifier.testTag("btn_search_photo_nav")) {
             Icon(
                 painter = painterResource(id = com.alireza.core.R.drawable.ic_no_favorite),
-                contentDescription = null
+                contentDescription = "search_photo"
             )
         }
         Spacer(modifier = modifier.size(8.dp))
@@ -82,10 +84,10 @@ private fun TopLayout(
 fun FullScreen(uiState: RecentPhotoState, modifier: Modifier = Modifier) {
     when (uiState) {
         Loading -> {
-            FlickrFinderCircularProgressBar(modifier = modifier)
+            FlickrFinderCircularProgressBar(modifier = modifier.testTag("loading_progress"))
         }
         is RecentPhotoList -> {
-            RecentPhotoList(uiState.photoList, modifier) { photoId, photoUrl ->
+            RecentPhotoList(uiState.photoList, modifier.testTag("recentPhotoList")) { photoId, photoUrl ->
 
             }
         }

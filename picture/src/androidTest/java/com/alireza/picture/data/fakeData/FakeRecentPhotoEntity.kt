@@ -2,6 +2,7 @@ package com.alireza.picture.data.fakeData
 
 import com.alireza.picture.data.local.entity.recentPhoto.RecentPhotoEntity
 import com.alireza.picture.data.remote.entity.recentPhoto.RecentPhotoResponse
+import com.alireza.picture.domain.model.recentPhoto.RecentPhotoMapper
 import kotlinx.coroutines.flow.flowOf
 
 val fakeRecentPhotoEntity = RecentPhotoEntity(
@@ -20,5 +21,6 @@ val fakeRecentPhotoEntity = RecentPhotoEntity(
     width = 0
 )
 val fakeRecentPhotoEntityList = listOf(fakeRecentPhotoEntity)
+val fakeRecentPhotoList = listOf(fakeRecentPhotoEntity).map { RecentPhotoMapper().toDomainModel(it) }
 val fakeRecentPhotoEntityListFlow = flowOf(fakeRecentPhotoEntityList)
 val fakeRecentPhotoFailedFlow = flowOf(RecentPhotoResponse( state = "fail", code = 1, message = "fail to fetch data"))
