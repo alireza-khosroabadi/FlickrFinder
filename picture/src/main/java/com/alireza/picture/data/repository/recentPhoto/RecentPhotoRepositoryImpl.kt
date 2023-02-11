@@ -38,7 +38,7 @@ class RecentPhotoRepositoryImpl @Inject constructor(
         return networkBoundResource(
             query = { recentPhotoDao.recentPhotos() },
             fetch = { pictureApiService.recentPhoto() },
-            shouldFetch = { shouldFetch.invoke() || forceToFetch.forceToFetch },
+            shouldFetch = {true /*shouldFetch.invoke() || forceToFetch.forceToFetch*/ },
             saveFetchResult = { requestType ->
                 recentPhotoDao.insert(
                     requestType.photos.photo.map { data -> recentPhotoMapper.toEntityModel(data) }

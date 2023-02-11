@@ -16,3 +16,4 @@ rootProject.name = "Flickr Finder"
 include ':app'
 include ':core'
 include ':picture'
+include ':ui'

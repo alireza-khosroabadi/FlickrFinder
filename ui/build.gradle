@@ -1,14 +1,12 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
-    id 'com.google.dagger.hilt.android'
     id 'kotlin-android'
-    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
 }
 
 android {
-    namespace 'com.alireza.picture'
+    namespace 'com.alireza.ui'
     compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
@@ -26,11 +24,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            minifyEnabled false
-            testCoverageEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -39,14 +32,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    kapt {
-        correctErrorTypes true
-    }
-    hilt {
-        enableTransformForLocalTests = true
-    }
     buildFeatures {
-        viewBinding true
         compose true
     }
     composeOptions {
@@ -60,13 +46,9 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':core')
-    implementation project(path: ':ui')
-    implementation apiLibraries
-    implementation composeUiLibraries
-    kapt kaptLibraries
 
-    //TEST
+    implementation composeUiLibraries
+
     testImplementation testLibraries
     androidTestImplementation androidTestLibraries
     kaptAndroidTest androidKaptTestLibraries

@@ -1,4 +1,4 @@
-package com.alireza.flickrfinder.presentation.compuseSplash.ui.theme
+package com.alireza.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

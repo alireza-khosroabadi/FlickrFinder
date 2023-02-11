@@ -1,4 +1,4 @@
-package com.alireza.flickrfinder.presentation.compuseSplash.ui.theme
+package com.alireza.ui.theme
 
 import android.app.Activity
 import android.os.Build

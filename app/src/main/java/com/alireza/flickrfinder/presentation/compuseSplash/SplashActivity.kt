@@ -10,31 +10,26 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.alireza.flickrfinder.presentation.compuseSplash.ui.theme.FlickrFinderTheme
+import com.alireza.picture.presentation.compose.recentPhoto.RecentPhotoScreen
+import com.alireza.picture.presentation.screen.FlickrFinderApp
+//import com.alireza.picture.presentation.screen.FlickrFinderApp
+import com.alireza.ui.theme.FlickrFinderTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             FlickrFinderTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    FlickrFinderApp()
+//                   RecentPhotoScreen()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    FlickrFinderTheme {
-        Greeting("Android")
     }
 }
