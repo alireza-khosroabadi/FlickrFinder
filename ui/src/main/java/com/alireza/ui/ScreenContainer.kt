@@ -10,7 +10,7 @@ import com.alireza.core.presentation.viewModel.BaseViewModelState
 import com.alireza.core.presentation.viewModel.ErrorState
 import com.alireza.core.presentation.viewModel.ExceptionState
 import com.alireza.core.presentation.viewModel.Initialize
-import com.alireza.ui.meptyState.EmptyState
+import com.alireza.ui.errorState.ErrorState
 
 @Composable
 fun ScreenContainer(
@@ -26,7 +26,7 @@ fun ScreenContainer(
         if (errorState != Initialize) {
             when (errorState) {
                 is ErrorState -> {}// EmptyState(uiState = errorState, modifier = modifier) {}
-                is ExceptionState -> EmptyState(uiState = errorState.error, modifier = modifier) {
+                is ExceptionState -> ErrorState(uiState = errorState.error, modifier = modifier) {
                     onRetryClick()
                 }
             }

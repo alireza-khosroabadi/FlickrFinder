@@ -1,4 +1,4 @@
-package com.alireza.ui.meptyState
+package com.alireza.ui.errorState
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -17,16 +17,14 @@ import com.alireza.ui.theme.FlickrFinderTheme
 
 
 @Composable
-fun EmptyState(uiState: AppError, modifier: Modifier = Modifier, onRetryClick: () -> Unit) {
+fun ErrorState(uiState: AppError, modifier: Modifier = Modifier, onRetryClick: () -> Unit) {
     when (uiState) {
         is AppError.NetworkConnection -> {}
-        is AppError.SocketTimeOut -> RetryActionError(
+        else -> RetryActionError(
             appError = uiState,
+            modifier= modifier,
             onRetryClick = onRetryClick
         )
-        is AppError.UnknownError -> {}
-        is AppError.UnknownHostException -> {}
-        is AppError.EmptyState -> RetryActionError(appError = uiState, onRetryClick = onRetryClick)
     }
 }
 
@@ -63,9 +61,9 @@ fun RetryActionError(appError: AppError, modifier: Modifier = Modifier, onRetryC
 
 @Preview
 @Composable
-fun PreviewEmptyState() {
+fun PreviewErrorState() {
     FlickrFinderTheme() {
-        EmptyState(
+        ErrorState(
             uiState = AppError.SocketTimeOut(), onRetryClick = {}
         )
     }
