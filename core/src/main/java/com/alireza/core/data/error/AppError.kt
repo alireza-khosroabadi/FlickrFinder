@@ -24,6 +24,9 @@ sealed class AppError(@DrawableRes val icon: Int, @StringRes val title: Int) {
 
     class UnknownHostException :
         AppError(icon = R.drawable.ic_server_unrichable, title = R.string.core_unknown_exception)
+
+    class EmptyState :
+        AppError(icon = R.drawable.ic_empty_state, title = R.string.empty_state_view_hint)
 }
 
 

@@ -46,7 +46,7 @@ android {
 }
 
 dependencies {
-
+    implementation project(path: ':core')
     implementation composeUiLibraries
 
     testImplementation testLibraries

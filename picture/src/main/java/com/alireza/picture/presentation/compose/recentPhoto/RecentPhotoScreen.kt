@@ -14,7 +14,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.alireza.core.presentation.viewModel.BaseViewModelState
+import com.alireza.core.presentation.viewModel.ErrorState
 import com.alireza.picture.R
+import com.alireza.ui.ScreenContainer
 import com.alireza.ui.progressBar.FlickrFinderCircularProgressBar
 
 
@@ -26,23 +29,32 @@ fun RecentPhotoScreen(
     onNavigateFavorite: () -> Unit
 ) {
     val uiState: RecentPhotoState by viewModel.recentPhotoState.collectAsStateWithLifecycle()
+    val errorState by viewModel.errorState.collectAsStateWithLifecycle()
     RecentPhotoScreen(
         uiState = uiState,
-        onNavigateToSearch= onNavigateToSearch,
-        onNavigateFavorite= onNavigateFavorite
-    )
+        errorState = errorState,
+        onNavigateToSearch = { /*TODO*/ },
+        onNavigateFavorite = {}) {
+        viewModel.loadRecentPhoto(true)
+    }
 }
 
 @Composable
 fun RecentPhotoScreen(
     uiState: RecentPhotoState,
+    errorState: BaseViewModelState,
     modifier: Modifier = Modifier,
     onNavigateToSearch: () -> Unit,
-    onNavigateFavorite: () -> Unit
+    onNavigateFavorite: () -> Unit,
+    onErrorStateAction: () -> Unit
 ) {
     Column(modifier.padding(16.dp)) {
         TopLayout(modifier, onNavigateToSearch, onNavigateFavorite)
-        FullScreen(uiState = uiState, modifier)
+        ScreenContainer(modifier = Modifier, errorState = errorState, onRetryClick = {
+            onErrorStateAction()
+        }) {
+            FullScreen(uiState = uiState, modifier)
+        }
     }
 
 }
@@ -63,7 +75,10 @@ private fun TopLayout(
             modifier = modifier.weight(1f)
         )
 
-        IconButton(onClick = onNavigateFavorite, modifier = modifier.testTag("btn_search_photo_nav")) {
+        IconButton(
+            onClick = onNavigateFavorite,
+            modifier = modifier.testTag("btn_search_photo_nav")
+        ) {
             Icon(
                 painter = painterResource(id = com.alireza.core.R.drawable.ic_no_favorite),
                 contentDescription = "search_photo"
@@ -87,7 +102,10 @@ fun FullScreen(uiState: RecentPhotoState, modifier: Modifier = Modifier) {
             FlickrFinderCircularProgressBar(modifier = modifier.testTag("loading_progress"))
         }
         is RecentPhotoList -> {
-            RecentPhotoList(uiState.photoList, modifier.testTag("recentPhotoList")) { photoId, photoUrl ->
+            RecentPhotoList(
+                uiState.photoList,
+                modifier.testTag("recentPhotoList")
+            ) { photoId, photoUrl ->
 
             }
         }

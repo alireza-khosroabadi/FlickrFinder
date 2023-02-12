@@ -27,6 +27,7 @@ class RecentPhotoViewModel @Inject constructor(private val getRecentPhoto: Recen
 
     fun loadRecentPhoto(forceToFetch: Boolean = false) {
         viewModelScope.launch {
+            resetState()
             getRecentPhoto.invoke(ShouldFetchParam(forceToFetch)).flowOn(Dispatchers.IO)
                 .map { useCaseModel ->
                     when (useCaseModel) {
