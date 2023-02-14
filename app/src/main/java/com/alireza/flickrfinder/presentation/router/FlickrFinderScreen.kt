@@ -34,7 +34,7 @@ fun FlickrFinderApp(
                 })
         }
         composable(FlickrFinderScreen.SearchPhotoScreen.name) {
-            SearchPhotoScreen()
+            SearchPhotoScreen(){photoId, photoUrl ->  }
         }
     }
 }
