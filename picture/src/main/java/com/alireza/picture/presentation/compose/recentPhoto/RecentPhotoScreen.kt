@@ -33,7 +33,7 @@ fun RecentPhotoScreen(
     RecentPhotoScreen(
         uiState = uiState,
         errorState = errorState,
-        onNavigateToSearch = { /*TODO*/ },
+        onNavigateToSearch = onNavigateToSearch,
         onNavigateFavorite = {}) {
         viewModel.loadRecentPhoto(true)
     }
@@ -48,7 +48,7 @@ fun RecentPhotoScreen(
     onNavigateFavorite: () -> Unit,
     onErrorStateAction: () -> Unit
 ) {
-    Column(modifier.padding(16.dp)) {
+    Column(modifier.padding(horizontal = 16.dp)) {
         TopLayout(modifier, onNavigateToSearch, onNavigateFavorite)
         ScreenContainer(modifier = Modifier, errorState = errorState, onRetryClick = {
             onErrorStateAction()
@@ -66,7 +66,7 @@ private fun TopLayout(
     onNavigateFavorite: () -> Unit
 ) {
     Row(
-        modifier = modifier.padding(bottom = 16.dp),
+        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(

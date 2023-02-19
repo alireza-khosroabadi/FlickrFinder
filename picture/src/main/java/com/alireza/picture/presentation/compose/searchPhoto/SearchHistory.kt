@@ -17,13 +17,14 @@ import com.alireza.picture.domain.model.searchHistory.SearchHistory
 import com.alireza.ui.theme.FlickrFinderTheme
 
 @Composable
-fun SearchList(
-    searchList: SearchHistoryList,
+fun SearchHistoryList(
+    searchList: SearchPhotoHistoryState,
     modifier: Modifier = Modifier,
     onItemClick: (searchItem: SearchHistory) -> Unit,
     onItemDeleteClick: (searchHistory: SearchHistory) -> Unit,
     onClearAllClick: () -> Unit,
 ) {
+    if (searchList is SearchHistoryList)
     Column {
         LazyColumn {
             itemsIndexed(searchList.lastHistory) { index, item ->
@@ -101,7 +102,7 @@ fun PreviewSearchHistoryCard() {
 @Composable
 fun PreviewSearchHistoryList() {
     FlickrFinderTheme() {
-        SearchList(
+        SearchHistoryList(
             searchList = SearchHistoryList(
                 mutableListOf(
                     SearchHistory("Alireza"),

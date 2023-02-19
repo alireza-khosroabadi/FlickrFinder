@@ -37,7 +37,7 @@ class SearchPhotoViewModel @Inject constructor(
         loadLastSearchHistory()
     }
 
-    private fun loadLastSearchHistory() {
+     fun loadLastSearchHistory() {
         viewModelScope.launch {
             historyPhotoUseCase.invoke(Unit)
                 .flowOn(Dispatchers.IO)
@@ -50,7 +50,7 @@ class SearchPhotoViewModel @Inject constructor(
                 }.stateIn(
                     scope = viewModelScope,
                     started = SharingStarted.WhileSubscribed(5_000),
-                    initialValue = com.alireza.picture.presentation.recentPhoto.Loading
+                    initialValue = Loading
                 ).collect { data ->
                     when (data) {
                         is SearchHistoryList -> _searchHistoryState.value = data
