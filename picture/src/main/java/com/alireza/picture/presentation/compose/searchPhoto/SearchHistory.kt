@@ -26,7 +26,7 @@ fun SearchHistoryList(
 ) {
     if (searchList is SearchHistoryList)
     Column {
-        LazyColumn {
+        LazyColumn(modifier = modifier.padding(horizontal = 16.dp)) {
             itemsIndexed(searchList.lastHistory) { index, item ->
                 SearchHistoryCard(
                     searchHistory = item,
@@ -39,14 +39,14 @@ fun SearchHistoryList(
             }
         }
 
+        if (searchList.lastHistory.isNotEmpty())
         TextButton(
             onClick = onClearAllClick, modifier = modifier
-                .padding(top = 8.dp)
                 .align(Alignment.End)
         ) {
             Text(
                 text = stringResource(id = R.string.fragmentSearchPhoto_clear_history),
-                style = MaterialTheme.typography.labelMedium
+                style = MaterialTheme.typography.labelSmall
             )
         }
     }
@@ -65,18 +65,19 @@ fun SearchHistoryCard(
     Surface(
         modifier = modifier,
         onClick = { onItemClick(searchHistory) }) {
-        Row(modifier = modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = searchHistory.query,
                 modifier = modifier.weight(1f),
-                style = MaterialTheme.typography.labelLarge,
+                style = MaterialTheme.typography.labelMedium,
             )
 
             IconButton(onClick = { onItemDeleteClick(searchHistory) }) {
                 Icon(
                     painter = painterResource(id = com.alireza.core.R.drawable.ic_delete),
+                    tint= Color.LightGray,
                     contentDescription = "search_history_delete",
-                    modifier = modifier.size(24.dp)
+                    modifier = modifier.size(16.dp)
                 )
             }
 

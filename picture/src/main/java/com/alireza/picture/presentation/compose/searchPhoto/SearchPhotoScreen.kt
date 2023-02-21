@@ -1,18 +1,29 @@
 package com.alireza.picture.presentation.compose.searchPhoto
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alireza.core.presentation.viewModel.BaseViewModelState
+import com.alireza.core.presentation.viewModel.ErrorState
+import com.alireza.core.presentation.viewModel.Initialize
+import com.alireza.picture.R
+import com.alireza.picture.domain.model.searchHistory.SearchHistory
 import com.alireza.ui.ScreenContainer
 import com.alireza.ui.inputText.TextInput
 
@@ -21,7 +32,8 @@ import com.alireza.ui.inputText.TextInput
 fun SearchPhotoScreen(
     viewModel: SearchPhotoViewModel = hiltViewModel(),
     onPhotoDetailNavigation: (photoId: String, photoUrl: String) -> Unit,
-    onBackClickListener: () -> Unit
+    onBackClickListener: () -> Unit,
+    modifier: Modifier=Modifier
 ) {
     val historyState = viewModel.searchHistoryState.collectAsStateWithLifecycle()
     val errorState = viewModel.errorState.collectAsStateWithLifecycle()
@@ -29,7 +41,12 @@ fun SearchPhotoScreen(
     SearchPhotoScreen(
         historyState = historyState.value,
         errorState = errorState.value,
-        onBackClickListener = onBackClickListener
+        onBackClickListener = onBackClickListener,
+        onEndIconClick = { text -> viewModel.searchPhoto(text) },
+        onItemClick = {item -> viewModel.searchPhoto(item.query)},
+        onItemDeleteClick = {item -> viewModel.removeHistory(item) },
+        onClearAllClick = { viewModel.clearAllHistory() },
+        modifier = modifier
     )
 
 }
@@ -39,49 +56,36 @@ fun SearchPhotoScreen(
 fun SearchPhotoScreen(
     historyState: SearchPhotoHistoryState,
     errorState: BaseViewModelState,
-    onBackClickListener: () -> Unit
+    onBackClickListener: () -> Unit,
+    onEndIconClick: ((text: String) -> Unit),
+    onItemClick: (searchItem: SearchHistory) -> Unit,
+    onItemDeleteClick: (searchHistory: SearchHistory) -> Unit,
+    onClearAllClick: () -> Unit,
+    modifier:Modifier = Modifier
 ) {
-    Column {
-        TopLayout(onBackClickListener = onBackClickListener)
-        ScreenContainer(errorState = errorState, onRetryClick = { /*TODO*/ }) {
-            SearchHistoryList(searchList = historyState, onItemClick = {}, onItemDeleteClick = {}) {
-
-            }
-        }
-    }
-}
-
-@Composable
-fun TopLayout(modifier: Modifier = Modifier, onBackClickListener: () -> Unit) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-            .padding(horizontal = 16.dp)
-            .fillMaxWidth()
-    ) {
-        TextInput(
-            modifier = modifier.fillMaxWidth(),
-            endIcon = com.alireza.ui.R.drawable.ic_search
-        )
-
-        IconButton(
-            onClick = onBackClickListener,
+    Column(modifier = modifier.padding(top = 16.dp, start = 16.dp)) {
+        SearchBox(
+            onBackClickListener = onBackClickListener,
+            onEndIconClick = onEndIconClick,
             modifier = modifier
-                .testTag("btn_back")
-                .weight(1f)
-        ) {
-            Icon(
-                painter = painterResource(id = com.alireza.ui.R.drawable.ic_arrow_right),
-                contentDescription = "back"
+        )
+        ScreenContainer(errorState = errorState, onRetryClick = { /*TODO*/ }) {
+            SearchHistoryList(
+                searchList = historyState,
+                onItemClick = onItemClick,
+                onItemDeleteClick = onItemDeleteClick,
+                onClearAllClick = onClearAllClick
             )
         }
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
-fun PreviewTopLayout() {
-    TopLayout() {}
+fun PreviewSearchPhotoScreen() {
+    SearchPhotoScreen(SearchHistoryList(mutableListOf()), Initialize, {}, {}, {}, {}, {})
 }
+
 
 

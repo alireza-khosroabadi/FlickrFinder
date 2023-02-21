@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
@@ -61,12 +62,12 @@ fun RecentPhotoScreen(
 
 @Composable
 private fun TopLayout(
-    modifier: Modifier,
+    modifier: Modifier=Modifier,
     onNavigateToSearch: () -> Unit,
     onNavigateFavorite: () -> Unit
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -77,14 +78,13 @@ private fun TopLayout(
 
         IconButton(
             onClick = onNavigateFavorite,
-            modifier = modifier.testTag("btn_search_photo_nav")
+            modifier = modifier.testTag("btn_search_photo_nav"),
         ) {
             Icon(
                 painter = painterResource(id = com.alireza.core.R.drawable.ic_no_favorite),
                 contentDescription = "search_photo"
             )
         }
-        Spacer(modifier = modifier.size(8.dp))
         IconButton(onClick = onNavigateToSearch) {
             Icon(
                 painter = painterResource(id = com.alireza.core.R.drawable.ic_search),
@@ -110,4 +110,11 @@ fun FullScreen(uiState: RecentPhotoState, modifier: Modifier = Modifier) {
             }
         }
     }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewTopLayout(){
+    TopLayout(onNavigateToSearch = {}, onNavigateFavorite = {})
 }
