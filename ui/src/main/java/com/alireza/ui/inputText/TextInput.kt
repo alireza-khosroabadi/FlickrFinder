@@ -30,7 +30,7 @@ fun TextInput(
     hint: String = "",
     modifier: Modifier = Modifier,
     @DrawableRes endIcon: Int? = null,
-    onEndIconClick: ((text: String) -> Unit)? = null,
+    onEndIconClick: (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
@@ -66,7 +66,7 @@ private fun DecorationBox(
     hint: String,
     innerTextField: @Composable () -> Unit,
     endIcon: Int?,
-    onEndIconClick: ((text: String) -> Unit)?
+    onEndIconClick: (() -> Unit)?
 ) {
     Row(
         modifier = Modifier
@@ -96,7 +96,7 @@ private fun DecorationBox(
         }
         if (endIcon != null) {
             Spacer(modifier = Modifier.width(width = 8.dp))
-            IconButton(onClick = { onEndIconClick?.invoke(searchQuery) }) {
+            IconButton(onClick = { onEndIconClick?.invoke() }) {
                 Icon(
                     painter = painterResource(id = endIcon),
                     contentDescription = "Favorite icon",

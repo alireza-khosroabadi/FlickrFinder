@@ -8,5 +8,6 @@ object Loading : SearchPhotoHistoryState()
 data class SearchHistoryList(val lastHistory: List<SearchHistory>) : SearchPhotoHistoryState()
 
 sealed class SearchPhotoState
+object Initialize : SearchPhotoState()
 object SearchPhotoLoading : SearchPhotoState()
 data class SearchPhotoList(val photoList: List<SearchPhoto>) : SearchPhotoState()

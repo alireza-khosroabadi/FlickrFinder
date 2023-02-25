@@ -29,7 +29,7 @@ class SearchPhotoViewModel @Inject constructor(
     val searchHistoryState: StateFlow<SearchPhotoHistoryState> = _searchHistoryState
 
 
-    private val _searchPhotoState = MutableStateFlow<SearchPhotoState>(SearchPhotoLoading)
+    private val _searchPhotoState = MutableStateFlow<SearchPhotoState>(Initialize)
     val searchPhotoState: StateFlow<SearchPhotoState> = _searchPhotoState
 
 

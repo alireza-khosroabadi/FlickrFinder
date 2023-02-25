@@ -22,11 +22,13 @@ import com.alireza.ui.inputText.TextInput
 
 @Composable
 fun SearchBox(
+    value:String,
     modifier: Modifier = Modifier, onBackClickListener: () -> Unit,
-    onEndIconClick: ((text: String) -> Unit)
+    onEndIconClick: (() -> Unit),
+    onTextChanged: ((text:String)->Unit)
 ) {
 
-    var queryString by remember { mutableStateOf("") }
+
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -34,14 +36,14 @@ fun SearchBox(
             .fillMaxWidth()
     ) {
         TextInput(
-            value = queryString,
-            onValueChange = { queryString = it },
+            value = value,
+            onValueChange = onTextChanged,
             hint = stringResource(id = R.string.fragmentSearchPhoto_search),
             modifier = modifier.weight(1f),
             endIcon = com.alireza.ui.R.drawable.ic_search,
             onEndIconClick = onEndIconClick,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-            keyboardActions = KeyboardActions(onSearch = { onEndIconClick?.invoke(queryString) })
+            keyboardActions = KeyboardActions(onSearch = { onEndIconClick?.invoke() })
         )
 
         IconButton(
@@ -60,5 +62,5 @@ fun SearchBox(
 @Preview(showBackground = true)
 @Composable
 fun PreviewTopLayout() {
-    SearchBox(onBackClickListener = {}) { text -> }
+    SearchBox("",onBackClickListener = {}, onEndIconClick = {}) {text->  }
 }

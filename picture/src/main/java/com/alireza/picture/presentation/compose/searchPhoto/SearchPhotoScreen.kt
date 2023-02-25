@@ -26,6 +26,7 @@ import com.alireza.picture.R
 import com.alireza.picture.domain.model.searchHistory.SearchHistory
 import com.alireza.ui.ScreenContainer
 import com.alireza.ui.inputText.TextInput
+import com.alireza.ui.progressBar.FlickrFinderCircularProgressBar
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
@@ -33,19 +34,26 @@ fun SearchPhotoScreen(
     viewModel: SearchPhotoViewModel = hiltViewModel(),
     onPhotoDetailNavigation: (photoId: String, photoUrl: String) -> Unit,
     onBackClickListener: () -> Unit,
-    modifier: Modifier=Modifier
+    modifier: Modifier = Modifier
 ) {
     val historyState = viewModel.searchHistoryState.collectAsStateWithLifecycle()
     val errorState = viewModel.errorState.collectAsStateWithLifecycle()
+    val photoState = viewModel.searchPhotoState.collectAsStateWithLifecycle()
+
+    var queryString by remember { mutableStateOf("") }
 
     SearchPhotoScreen(
+        queryString,
+        photoState = photoState.value,
         historyState = historyState.value,
         errorState = errorState.value,
         onBackClickListener = onBackClickListener,
-        onEndIconClick = { text -> viewModel.searchPhoto(text) },
-        onItemClick = {item -> viewModel.searchPhoto(item.query)},
-        onItemDeleteClick = {item -> viewModel.removeHistory(item) },
+        onEndIconClick = {viewModel.searchPhoto(queryString) },
+        onItemClick = { item -> viewModel.searchPhoto(item.query) },
+        onItemDeleteClick = { item -> viewModel.removeHistory(item) },
         onClearAllClick = { viewModel.clearAllHistory() },
+        onTextChanged = {viewModel.searchPhoto(queryString) },
+        onPhotoClick = onPhotoDetailNavigation,
         modifier = modifier
     )
 
@@ -54,28 +62,52 @@ fun SearchPhotoScreen(
 
 @Composable
 fun SearchPhotoScreen(
+    searchQuery:String,
+    photoState: SearchPhotoState,
     historyState: SearchPhotoHistoryState,
     errorState: BaseViewModelState,
     onBackClickListener: () -> Unit,
-    onEndIconClick: ((text: String) -> Unit),
+    onEndIconClick: (() -> Unit),
     onItemClick: (searchItem: SearchHistory) -> Unit,
     onItemDeleteClick: (searchHistory: SearchHistory) -> Unit,
     onClearAllClick: () -> Unit,
-    modifier:Modifier = Modifier
+    onTextChanged:(text:String)->Unit,
+    onPhotoClick: (photoId: String, photoUrl: String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
+
     Column(modifier = modifier.padding(top = 16.dp, start = 16.dp)) {
         SearchBox(
             onBackClickListener = onBackClickListener,
             onEndIconClick = onEndIconClick,
-            modifier = modifier
+            modifier = modifier,
+            value = searchQuery,
+            onTextChanged = onTextChanged
         )
-        ScreenContainer(errorState = errorState, onRetryClick = { /*TODO*/ }) {
-            SearchHistoryList(
-                searchList = historyState,
-                onItemClick = onItemClick,
-                onItemDeleteClick = onItemDeleteClick,
-                onClearAllClick = onClearAllClick
-            )
+        ScreenContainer(
+            errorState = errorState,
+            onRetryClick = { if (searchQuery.isNotEmpty()) onEndIconClick },
+            modifier = modifier.padding(end = 16.dp)) {
+            Box {
+                if (historyState is SearchHistoryList
+                    && historyState.lastHistory.isNotEmpty()
+                    && (photoState is SearchPhotoList).not()
+                )
+                    SearchHistoryList(
+                        searchList = historyState,
+                        onItemClick = onItemClick,
+                        onItemDeleteClick = onItemDeleteClick,
+                        onClearAllClick = onClearAllClick,
+                        modifier = modifier
+                    )
+                if (photoState is SearchPhotoLoading)
+                    FlickrFinderCircularProgressBar(modifier = modifier.testTag("loading_progress"))
+                else if (photoState is SearchPhotoList)
+                    SearchPhotoList(
+                        photoList = (photoState as SearchPhotoList),
+                        onPhotoClick = onPhotoClick
+                    )
+            }
         }
     }
 }
@@ -84,7 +116,7 @@ fun SearchPhotoScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewSearchPhotoScreen() {
-    SearchPhotoScreen(SearchHistoryList(mutableListOf()), Initialize, {}, {}, {}, {}, {})
+//    SearchPhotoScreen(SearchHistoryList(mutableListOf()), Initialize, {}, {}, {}, {}, {})
 }
 
 
