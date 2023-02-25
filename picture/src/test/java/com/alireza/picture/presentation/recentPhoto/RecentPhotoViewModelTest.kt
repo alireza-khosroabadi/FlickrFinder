@@ -37,16 +37,18 @@ class RecentPhotoViewModelTest{
 
     @Test
     fun `get recent photo success`()= runTest {
-        val collectJob = launch(UnconfinedTestDispatcher()) {recentPhotoViewModel.recentPhotoState.value }
         `when`(recentPhotoUseCase.invoke(any())).thenReturn(fakeRecentPhotoUseCaseModel)
-        recentPhotoViewModel.loadRecentPhoto()
-        val uiState = recentPhotoViewModel.recentPhotoState.value
-        assertEquals(uiState is Loading , true)
+        // Create an empty collector for the StateFlow
+        val collectJob = launch(UnconfinedTestDispatcher(testScheduler)) {
+            recentPhotoViewModel.recentPhotoState.value
+        }
+
+        assertEquals( Loading, recentPhotoViewModel.recentPhotoState.value)
 
         advanceUntilIdle()
 
         val uiStateSecond = recentPhotoViewModel.recentPhotoState.value
-        assertEquals(uiStateSecond is RecentPhotoList , true)
+        assertEquals(true, uiStateSecond is RecentPhotoList )
 
         collectJob.cancel()
     }

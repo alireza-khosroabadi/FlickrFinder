@@ -34,7 +34,9 @@ fun FlickrFinderApp(
                 })
         }
         composable(FlickrFinderScreen.SearchPhotoScreen.name) {
-            SearchPhotoScreen()
+            SearchPhotoScreen(onPhotoDetailNavigation = {photoId, photoUrl ->  }, onBackClickListener = {
+                navController.navigateUp()
+            })
         }
     }
 }

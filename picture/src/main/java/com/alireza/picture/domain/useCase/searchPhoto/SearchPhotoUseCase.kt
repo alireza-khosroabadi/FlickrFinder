@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class SearchPhotoUseCase @Inject constructor(
+open class SearchPhotoUseCase @Inject constructor(
     private val searchPhotoRepository: SearchPhotoRepository,
     private val mapper: SearchPhotoMapper
 ) :
