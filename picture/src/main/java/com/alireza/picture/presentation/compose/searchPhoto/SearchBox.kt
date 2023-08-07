@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alireza.picture.R
 import com.alireza.ui.inputText.TextInput
+import com.alireza.ui.inputText.rememberTextInputUserState
 
 
 @Composable
@@ -27,8 +28,7 @@ fun SearchBox(
     onEndIconClick: (() -> Unit),
     onTextChanged: ((text:String)->Unit)
 ) {
-
-
+    val state = rememberTextInputUserState(hint = stringResource(id = R.string.fragmentSearchPhoto_search))
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -36,11 +36,9 @@ fun SearchBox(
             .fillMaxWidth()
     ) {
         TextInput(
-            value = value,
-            onValueChange = onTextChanged,
-            hint = stringResource(id = R.string.fragmentSearchPhoto_search),
+            state = state,
             modifier = modifier.weight(1f),
-            endIcon = com.alireza.ui.R.drawable.ic_search,
+            endIcon = com.alireza.core.R.drawable.ic_search,
             onEndIconClick = onEndIconClick,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(onSearch = { onEndIconClick?.invoke() })
@@ -52,7 +50,7 @@ fun SearchBox(
                 .testTag("btn_back")
         ) {
             Icon(
-                painter = painterResource(id = com.alireza.ui.R.drawable.ic_arrow_right),
+                painter = painterResource(id = com.alireza.core.R.drawable.ic_arrow_right),
                 contentDescription = "back"
             )
         }
