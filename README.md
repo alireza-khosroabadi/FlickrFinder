@@ -14,8 +14,7 @@ I select feature module pattern for this application and each module implemented
 The project contains three main modules:
 
 ## Application Diagram
-Application Diagram            |
-:-------------------------:
+
 <img src="https://github.com/alireza-khosroabadi/FlickrFinderApp/blob/master/screenshots/AppDiagram.png" width="400">
 
 
