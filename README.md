@@ -16,7 +16,7 @@ The project contains three main modules:
 ## Application Diagram
 Application Diagram            |
 :-------------------------:
-<img src="https://github.com/alireza-khosroabadi/FlickrFinderApp/blob/master/screenshots/AppDiagram.jpg" width="400">
+<img src="https://github.com/alireza-khosroabadi/FlickrFinderApp/blob/master/screenshots/AppDiagram.png" width="400">
 
 
 **Application**
