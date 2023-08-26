@@ -30,6 +30,11 @@ abstract class BaseFragment<T: ViewBinding>():Fragment(){
         setupViews()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     abstract fun getViewBinding(): T
     protected abstract fun donOnCreateView()
     protected abstract fun setupViews()

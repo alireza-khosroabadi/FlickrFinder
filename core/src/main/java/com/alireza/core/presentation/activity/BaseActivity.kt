@@ -16,6 +16,11 @@ abstract class BaseActivity<T: ViewBinding>:AppCompatActivity(){
         doOnCreate()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding= null
+    }
+
     abstract fun getViewBinding(): T
     protected abstract fun doOnCreate()
 }
