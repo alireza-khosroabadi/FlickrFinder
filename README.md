@@ -7,12 +7,15 @@ With this little and minimal application, you can fetch 25 recent photo, search 
 ## Project Structure ⚙️
 
 This Application is based on **CLEAN** architecture combined with **MVVM** architecture and is written in **Kotlin**
-Use IntentFilter for navigate between activities to independent activities from each other.
-every module can be a single activity.
+Use IntentFilter for navigate between activities to independent activities from each other, every module can be a single activity.
+This application implement repository pattern and offline first to fetch data from network, every time return from local storage as single source of trues.
+I select feature module pattern for this application and each module implemented in **CLEAN ARCHITECTURE**. I select this modularization pattern because we can easily replace every module and feature with new one.
 
+The project contains three main modules:
 
-The project contains four main module:
+## Application Diagram
 
+<img src="https://github.com/alireza-khosroabadi/FlickrFinderApp/blob/master/screenshots/AppDiagram.png" width="400">
 
 
 **Application**
