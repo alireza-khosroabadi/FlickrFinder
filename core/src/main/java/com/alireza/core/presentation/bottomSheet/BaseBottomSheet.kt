@@ -22,13 +22,8 @@ abstract class BaseBottomSheet<T: ViewBinding>():BottomSheetDialogFragment(){
         savedInstanceState: Bundle?
     ): View? {
         _binding = getViewBinding()
-        donOnCreateView()
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         setupViews()
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -36,6 +31,5 @@ abstract class BaseBottomSheet<T: ViewBinding>():BottomSheetDialogFragment(){
         _binding = null
     }
     abstract fun getViewBinding(): T
-    protected abstract fun donOnCreateView()
     protected abstract fun setupViews()
 }
